@@ -1,7 +1,26 @@
+using AspNetCoreHero.ToastNotification;
+using BusinessLayer.interfaces;
+using BusinessLayer.services;
+using BusinessLayer.validators;
+using DAL.layers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddNotyf(config => { config.DurationInSeconds = 5; config.IsDismissable = true; config.Position = NotyfPosition.TopRight; });
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+builder.Services.AddSingleton<IDALUser, DALUser>();
+builder.Services.AddSingleton<UserValidator>();
+builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();
 
@@ -17,7 +36,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthorization();
 
 app.MapRazorPages();

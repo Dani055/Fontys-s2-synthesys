@@ -1,18 +1,386 @@
-html {
-  font-size: 14px;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+:root{
+    --main-color: #3ca542;
+    --main-color-dark: #0f7a15;
+    --text-color: #F2EFEA;
+    --compliment-color: #2e2e2e;
+    --smoke-white: #f7f7f7;;
+    --dark-grey: rgb(175, 175, 175);
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+body{
+    font-family: 'Roboto', sans-serif;    
+}
+.wrapper{
+    max-width: 70em;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+.site{
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.landing{
+    position: relative;
+
+}
+.landing:hover:before{
+    filter: blur(2px) grayscale(50%);
+}
+.landing:before{
+    z-index: -1;
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("../images/field.jpg");
+    transition: filter 0.2s ease-in;
+}
+.landing .wrapper{
+    background: rgb(148,148,148);
+    background: radial-gradient(circle, rgba(148,148,148,0.6612394957983193) 0%, rgba(214,214,214,0.720063025210084) 55%);
+    min-height: 80vh;
+    text-align: center;
+}
+.landing h1{
+    font-weight: 500;
+    padding-top: 3em;
+    padding-bottom: 6em;
+    
+}
+.landing a{
+    padding: 1em 2em;
+    border-radius: 30px;
+}
+.landing a.button-black {
+    background-color: var(--compliment-color);
+    color: var(--text-color);
+}
+.landing a.button-white {
+    background-color: var(--smoke-white);
+    color: var(--compliment-color);
+}
+.landing a:hover{
+    font-size: 1.04em;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+/* FORMS */
+form.with-legend{
+    max-width: 27em;
+    margin: 5em auto 5em auto;
+    padding: 10px 30px 30px 30px;
+    border-radius: 5px;
+}
+textarea{
+    resize: none;
+}
+form.with-legend textarea,
+form.with-legend input[type="text"],
+form.with-legend input[type="tel"],
+form.with-legend input[type="email"],
+form.with-legend input[type="password"]{
+    display: block;
+    width: 100%;
+    border: 1.5px solid #CCC;
+    padding: 3px;
+    border-radius: 0.3em;
+    outline: none;
+    transition: border 0.3s ease-in;
+}
+form.with-legend textarea:hover,
+form.with-legend input[type="text"]:hover,
+form.with-legend input[type="tel"]:hover,
+form.with-legend input[type="email"]:hover,
+form.with-legend input[type="password"]:hover{
+    border-color: var(--main-color);
 }
 
-body {
-  margin-bottom: 60px;
+form.with-legend textarea:focus,
+form.with-legend input[type="text"]:focus,
+form.with-legend input[type="tel"]:focus,
+form.with-legend input[type="email"]:focus,
+form.with-legend input[type="password"]:focus{
+    border-color: var(--main-color);
 }
+form.with-legend textarea:focus + label,
+input[type="text"]:focus + label,
+input[type="tel"]:focus + label,
+input[type="email"]:focus + label,
+input[type="password"]:focus + label{
+    color: var(--main-color);
+}
+
+form.with-legend fieldset {
+    border: 2px solid var(--main-color);
+    border-radius: 5px;
+    padding: 1em;   
+}
+form.with-legend .form-content{
+    padding: 1em 3em;
+}
+legend {
+    padding: 0 1em;
+    font-weight: bold;
+    font-size: 1.4em;
+    color: var(--main-color);
+}
+form.with-legend .field{
+    display: flex;
+    flex-direction: column;
+    flex-direction: column-reverse;
+    margin: 0 auto;
+}
+
+form.with-legend .field + .field{
+    margin-top: 1em;
+}
+form.with-legend label{
+    transition: color 0.3s ease-in;
+}
+form.with-legend .field-submit{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1em;
+}
+form.with-legend .field-submit button{
+    padding: 0.5em 1.2em;
+    border-radius: 0.3em;
+    border: 2px solid var(--main-color);
+    background-color: var(--main-color);
+    color: #FFFEE0;
+    margin-top: 1em;
+    transition: background-color 0.2s ease-in, color 0.2s ease-in;
+    cursor:pointer;
+}
+form.with-legend .field-submit button:hover{
+    background-color: rgb(255, 249, 249);
+    color: var(--compliment-color);
+}
+
+form.search input{
+    padding: 0.3em 0.5em;
+    border: 2px solid #CCC;
+    border-radius: 0.3em;
+    transition: border 0.3s ease-in;
+}
+form.search input:hover{
+    border-color: var(--main-color);
+}
+form.search button{
+    margin-left: 0.3em;
+    border-radius: 3px;
+    border: 2px solid var(--main-color);
+    background-color: var(--main-color);
+    color: var(--text-color);
+    padding: 0.3em 0.5em;
+}
+form.search button:hover{
+    background-color: transparent;
+    color: var(--compliment-color);
+    cursor: pointer;
+}
+
+.content-header{
+    text-align: center;
+    padding: 3em 0 2em 0;
+}
+.content-header h2{
+    padding-bottom: 0.5em;
+}
+.sort-links{
+    border: 2px solid var(--main-color);
+    border-radius: 5px;
+    max-width: 20em;
+    margin: 0 auto;
+    padding: 1em;
+}
+.sort-links a{
+    padding: 0.2em 1em;
+}
+a.active, p.active{
+    color: var(--main-color);
+}
+.sort-links a:hover{
+    color: var(--main-color);
+
+}
+
+.tournaments{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2em;
+}
+.tournament-card{
+    border: 2px solid var(--main-color-dark);
+    border-radius: 2px;
+}
+.tournament-card + .tournament-card{
+    margin-top: 2em;
+}
+.tournament-card-content{
+    padding: 0 1em;
+}
+.tournament-card-header{
+    border-bottom: 2px solid var(--main-color-dark);
+    padding: 1em;
+    color: var(--main-color-dark)
+}
+.tournament-card-header a{
+    font-size: 1.2em;
+}
+.tournament-card-header a:hover{
+    color: var(--main-color-dark)
+}
+.tournament-card-desc{
+    padding: 1em 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.desc-align-right{
+    margin-left: auto;
+}
+.desc-border-bottom{
+    border-bottom: 2px solid var(--dark-grey);
+}
+.row{
+    text-align: center;
+    padding-bottom: 2em;
+}
+.row a{
+    font-size: 1.2em;
+}
+.row a:hover{
+    color: var(--main-color);
+}
+
+.tournament-details{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2em 0;
+}
+.tournament-main-info{
+    flex: 1 0 38%;
+    padding: 1em;
+    border-right: 2px solid var(--compliment-color);
+}
+.tournament-main-info h2, .tournament-main-info h3{
+    padding-bottom: 1em;
+}
+.tournament-side-info{
+    flex: 0 0 62%;
+    padding: 1em 2em;
+}
+.tournament-standings{
+    flex: 0 0 50%;
+    padding: 1em;
+    margin-top: 2em;
+    border-top: 2px solid var(--compliment-color);
+}
+.tournament-games{
+    flex: 0 0 50%;
+    padding: 1em;
+    margin-top: 2em;
+    border-top: 2px solid var(--compliment-color);
+}
+.tournament-games h3{
+    padding-bottom: 1em;
+ }
+.tournament-standing{
+    background-color: var(--smoke-white);
+    border-radius: 3px;
+    padding: 1em;
+}
+.tournament-standings h3{
+   padding-bottom: 1em;
+}
+.tournament-standing + .tournament-standing{
+    margin-top: 1em;
+}
+.game{
+    background-color: var(--text-color);
+    padding: 1em;
+    text-align: center;
+}
+.game + .game{
+    margin-top: 1em;
+}
+.game a{
+    font-size: 1.1em;
+}
+.game a:hover{
+    color: var(--main-color-dark)
+}
+.game p{
+    padding-bottom: 0.5em;
+}
+.game-players{
+    display: flex;
+    justify-content: space-between;
+}
+.tournament-card-desc a{
+    padding: 1em 2em;
+    border-radius: 30px;
+}
+.tournament-card-desc a.button-black {
+    background-color: var(--main-color);
+    color: var(--text-color);
+}
+.tournament-card-desc a.button-white {
+    background-color: red;
+    color: var(--smoke-white);
+}
+.tournament-card-desc a:hover{
+    font-size: 1.04em;
+}
+
+.profile{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-bottom: 2em;
+}
+.profile .pfp{
+    flex: 0 0 100%;
+}
+.pfp .media{
+    max-width: 30%;
+    margin: 0 auto;
+}
+.media img{
+    width: 100%;
+    height: auto;
+}
+.profile .row{
+    flex: 0 0 100%;
+    padding-top: 1em;
+}
+.profile .row33{
+    flex: 0 0 31%;
+}
+.row33 p{
+    padding-bottom: 0.5em;
+}
+.row33 h3{
+    padding-bottom: 1em;
+}
+span.green{
+    color: var(--main-color-dark)
+}
+span.red{
+    color: red;
+}
+span.blue{
+    color: royalblue;
+}
+
+
+
+

@@ -49,11 +49,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.lblSalary = new System.Windows.Forms.Label();
-            this.tbxSalary = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.btnCreateAccount = new System.Windows.Forms.Button();
+            this.tbxSalary = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbxSalary)).BeginInit();
             this.SuspendLayout();
             // 
             // tbxPassword
@@ -156,6 +157,7 @@
             this.cbxRole.Name = "cbxRole";
             this.cbxRole.Size = new System.Drawing.Size(151, 28);
             this.cbxRole.TabIndex = 36;
+            this.cbxRole.SelectedIndexChanged += new System.EventHandler(this.cbxRole_SelectedIndexChanged);
             // 
             // lblPassword
             // 
@@ -244,15 +246,6 @@
             this.lblSalary.TabIndex = 53;
             this.lblSalary.Text = "Salary";
             // 
-            // tbxSalary
-            // 
-            this.tbxSalary.BackColor = System.Drawing.Color.Gainsboro;
-            this.tbxSalary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbxSalary.Location = new System.Drawing.Point(271, 252);
-            this.tbxSalary.Name = "tbxSalary";
-            this.tbxSalary.Size = new System.Drawing.Size(151, 27);
-            this.tbxSalary.TabIndex = 52;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -290,17 +283,30 @@
             this.btnCreateAccount.TabIndex = 56;
             this.btnCreateAccount.Text = "Create Account";
             this.btnCreateAccount.UseVisualStyleBackColor = false;
+            this.btnCreateAccount.Click += new System.EventHandler(this.btnCreateAccount_Click);
+            // 
+            // tbxSalary
+            // 
+            this.tbxSalary.Location = new System.Drawing.Point(270, 253);
+            this.tbxSalary.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.tbxSalary.Name = "tbxSalary";
+            this.tbxSalary.Size = new System.Drawing.Size(150, 27);
+            this.tbxSalary.TabIndex = 57;
             // 
             // RegisterAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(508, 411);
+            this.Controls.Add(this.tbxSalary);
             this.Controls.Add(this.btnCreateAccount);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.lblSalary);
-            this.Controls.Add(this.tbxSalary);
             this.Controls.Add(this.tbxPassword);
             this.Controls.Add(this.tbxUsername);
             this.Controls.Add(this.label2);
@@ -322,6 +328,7 @@
             this.Name = "RegisterAccount";
             this.Text = "Register Account";
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbxSalary)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -349,9 +356,9 @@
         private Label label4;
         private BindingSource bindingSource1;
         private Label lblSalary;
-        private TextBox tbxSalary;
         private Label label6;
         private Label label9;
         private Button btnCreateAccount;
+        private NumericUpDown tbxSalary;
     }
 }

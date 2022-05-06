@@ -4,7 +4,16 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="landing">
+   <div class="wrapper">
+       <h1>DuelSys Inc. welcomes you!</h1>
+       @if (HttpContext.Session.GetLoggedUser() != null)
+       {
+            <a asp-page="/Auth/Logout" class="button-white">Log out</a>
+       }
+       else
+       {
+            <a asp-page="/Auth/Login" class="button-black">Log in</a>
+       }
+   </div>
+</section>

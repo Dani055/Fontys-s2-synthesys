@@ -1,0 +1,46 @@
+header{
+    background-color: var(--main-color);
+    box-shadow: 0 0 0.3em 0 rgba(0, 0, 0, 0.7);
+    z-index: 2;
+}
+nav a{
+    color: var(--text-color);
+    transition: color 0.2s ease-in;
+    font-weight: 500;
+}
+nav a:hover{
+    color: var(--compliment-color);
+    border-bottom: 1px solid var(--compliment-color);
+}
+a.logo{
+    max-width: 12em;
+}
+a.logo img{
+    width: 100%;
+    height: auto;
+}
+a.logo:hover img{
+    filter: grayscale(0.5);
+}
+header .wrapper{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-top: 0.7em;
+    padding-bottom: 0.7em;
+}
+header nav ul{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+header ul a{
+    padding: 0.2em 0.5em;
+    margin: 0 0.5em;
+}
+header p.welcome{
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 1.1em;
+}

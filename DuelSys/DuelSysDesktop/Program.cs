@@ -1,10 +1,27 @@
+using BusinessLayer.interfaces;
+using BusinessLayer.services;
+using BusinessLayer.validators;
+using DAL.layers;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 namespace DuelSysDesktop
 {
     internal static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
+        public static IServiceProvider ServiceProvider { get; } = CreateServices();
+
+        private static IServiceProvider CreateServices()
+        {
+            return new HostBuilder().ConfigureServices(services =>
+            {
+                services.AddSingleton<IDALUser, DALUser>();
+                services.AddSingleton<UserValidator>();
+                services.AddScoped<UserService>();
+
+            }).Build()
+            .Services;
+        }
+
         [STAThread]
         static void Main()
         {

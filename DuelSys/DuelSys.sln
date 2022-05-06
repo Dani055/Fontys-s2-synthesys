@@ -5,7 +5,11 @@ VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DuelSysDesktop", "DuelSysDesktop\DuelSysDesktop.csproj", "{C842A384-2558-4257-8337-69D50998712C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuelSysWeb", "DuelSysWeb\DuelSysWeb.csproj", "{818E944B-F86C-4F92-938A-033E05DD392C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DuelSysWeb", "DuelSysWeb\DuelSysWeb.csproj", "{818E944B-F86C-4F92-938A-033E05DD392C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{3F7B2439-8EE6-473B-8F79-902097CD8AFA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{FD8F7B7E-145B-4B59-BB56-5DF29F458215}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{818E944B-F86C-4F92-938A-033E05DD392C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{818E944B-F86C-4F92-938A-033E05DD392C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{818E944B-F86C-4F92-938A-033E05DD392C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F7B2439-8EE6-473B-8F79-902097CD8AFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F7B2439-8EE6-473B-8F79-902097CD8AFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F7B2439-8EE6-473B-8F79-902097CD8AFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F7B2439-8EE6-473B-8F79-902097CD8AFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD8F7B7E-145B-4B59-BB56-5DF29F458215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD8F7B7E-145B-4B59-BB56-5DF29F458215}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD8F7B7E-145B-4B59-BB56-5DF29F458215}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD8F7B7E-145B-4B59-BB56-5DF29F458215}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
