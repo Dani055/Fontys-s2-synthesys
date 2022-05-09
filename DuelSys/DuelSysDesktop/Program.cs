@@ -15,8 +15,13 @@ namespace DuelSysDesktop
             return new HostBuilder().ConfigureServices(services =>
             {
                 services.AddSingleton<IDALUser, DALUser>();
+                services.AddSingleton<IDALTournament, DALTournament>();
+
                 services.AddSingleton<UserValidator>();
+                services.AddSingleton<TournamentValidator>();
+
                 services.AddScoped<UserService>();
+                services.AddScoped<TournamentService>();
 
             }).Build()
             .Services;

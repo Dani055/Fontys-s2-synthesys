@@ -32,7 +32,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.lblLocation = new System.Windows.Forms.Label();
-            this.tbxSalary = new System.Windows.Forms.TextBox();
+            this.tbLocation = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblStartDate = new System.Windows.Forms.Label();
@@ -49,16 +49,16 @@
             this.tbDesc = new System.Windows.Forms.RichTextBox();
             this.dtStart = new System.Windows.Forms.DateTimePicker();
             this.dtEnd = new System.Windows.Forms.DateTimePicker();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.tbMinPlayers = new System.Windows.Forms.NumericUpDown();
+            this.tbMaxPlayers = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.cbSystem = new System.Windows.Forms.ComboBox();
             this.lblSystem = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.btnCreateTourney = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbMinPlayers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbMaxPlayers)).BeginInit();
             this.SuspendLayout();
             // 
             // label9
@@ -93,14 +93,14 @@
             this.lblLocation.TabIndex = 75;
             this.lblLocation.Text = "Location";
             // 
-            // tbxSalary
+            // tbLocation
             // 
-            this.tbxSalary.BackColor = System.Drawing.Color.Gainsboro;
-            this.tbxSalary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbxSalary.Location = new System.Drawing.Point(379, 245);
-            this.tbxSalary.Name = "tbxSalary";
-            this.tbxSalary.Size = new System.Drawing.Size(192, 27);
-            this.tbxSalary.TabIndex = 74;
+            this.tbLocation.BackColor = System.Drawing.Color.Gainsboro;
+            this.tbLocation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbLocation.Location = new System.Drawing.Point(379, 245);
+            this.tbLocation.Name = "tbLocation";
+            this.tbLocation.Size = new System.Drawing.Size(192, 27);
+            this.tbLocation.TabIndex = 74;
             // 
             // label2
             // 
@@ -267,21 +267,21 @@
             this.dtEnd.Size = new System.Drawing.Size(257, 27);
             this.dtEnd.TabIndex = 83;
             // 
-            // numericUpDown1
+            // tbMinPlayers
             // 
-            this.numericUpDown1.BackColor = System.Drawing.Color.Gainsboro;
-            this.numericUpDown1.Location = new System.Drawing.Point(379, 72);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(129, 27);
-            this.numericUpDown1.TabIndex = 84;
+            this.tbMinPlayers.BackColor = System.Drawing.Color.Gainsboro;
+            this.tbMinPlayers.Location = new System.Drawing.Point(379, 72);
+            this.tbMinPlayers.Name = "tbMinPlayers";
+            this.tbMinPlayers.Size = new System.Drawing.Size(129, 27);
+            this.tbMinPlayers.TabIndex = 84;
             // 
-            // numericUpDown2
+            // tbMaxPlayers
             // 
-            this.numericUpDown2.BackColor = System.Drawing.Color.Gainsboro;
-            this.numericUpDown2.Location = new System.Drawing.Point(380, 162);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(128, 27);
-            this.numericUpDown2.TabIndex = 85;
+            this.tbMaxPlayers.BackColor = System.Drawing.Color.Gainsboro;
+            this.tbMaxPlayers.Location = new System.Drawing.Point(380, 162);
+            this.tbMaxPlayers.Name = "tbMaxPlayers";
+            this.tbMaxPlayers.Size = new System.Drawing.Size(128, 27);
+            this.tbMaxPlayers.TabIndex = 85;
             // 
             // label8
             // 
@@ -352,6 +352,7 @@
             this.btnCreateTourney.TabIndex = 91;
             this.btnCreateTourney.Text = "Create Tournament";
             this.btnCreateTourney.UseVisualStyleBackColor = false;
+            this.btnCreateTourney.Click += new System.EventHandler(this.btnCreateTourney_Click);
             // 
             // CreateTournament
             // 
@@ -364,8 +365,8 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.cbSystem);
             this.Controls.Add(this.lblSystem);
-            this.Controls.Add(this.numericUpDown2);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.tbMaxPlayers);
+            this.Controls.Add(this.tbMinPlayers);
             this.Controls.Add(this.dtEnd);
             this.Controls.Add(this.dtStart);
             this.Controls.Add(this.tbDesc);
@@ -374,7 +375,7 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.lblLocation);
-            this.Controls.Add(this.tbxSalary);
+            this.Controls.Add(this.tbLocation);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblStartDate);
@@ -389,8 +390,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CreateTournament";
             this.Text = "Create Tournament";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbMinPlayers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbMaxPlayers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -401,7 +402,7 @@
         private Label label9;
         private Label label6;
         private Label lblLocation;
-        private TextBox tbxSalary;
+        private TextBox tbLocation;
         private Label label2;
         private Label label1;
         private Label lblStartDate;
@@ -418,8 +419,8 @@
         private RichTextBox tbDesc;
         private DateTimePicker dtStart;
         private DateTimePicker dtEnd;
-        private NumericUpDown numericUpDown1;
-        private NumericUpDown numericUpDown2;
+        private NumericUpDown tbMinPlayers;
+        private NumericUpDown tbMaxPlayers;
         private Label label8;
         private ComboBox cbSystem;
         private Label lblSystem;

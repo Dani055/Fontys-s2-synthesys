@@ -72,7 +72,7 @@ namespace DAL.layers
 
         public bool RegisterStaff(Staff staff)
         {
-            MySqlConnection conn = new MySqlConnection(Utils.conString);
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
                 string sql = "INSERT INTO s2synt_user (username, password, email, address, first_name, last_name, role_id, won_games, lost_games, salary) VALUES(@username, @password, @email, @address, @first_name, @last_name, @role_id, @won_games, @lost_games, @salary); ";
@@ -100,7 +100,7 @@ namespace DAL.layers
 
         public bool RegisterPlayer(Player player)
         {
-            MySqlConnection conn = new MySqlConnection(Utils.conString);
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
                 string sql = "INSERT INTO s2synt_user (username, password, email, address, first_name, last_name, role_id, won_games, lost_games, salary) VALUES(@username, @password, @email, @address, @first_name, @last_name, @role_id, @won_games, @lost_games, @salary); ";

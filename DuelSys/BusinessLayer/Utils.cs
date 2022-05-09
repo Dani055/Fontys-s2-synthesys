@@ -9,9 +9,11 @@ namespace BusinessLayer
 {
     public static class Utils
     {
-        public static string conString { get; } = "server=studmysql01.fhict.local;database=dbi476740;uid=dbi476740;password=123rty;";
-        public static bool UpdateContent { get; set; } = false;
 
+        public static DateTime GetSystemDate { get
+            {
+                return DateTime.Now;
+            }}
 
         private const int SaltSize = 16;
 
