@@ -58,11 +58,11 @@ body{
     padding: 1em 2em;
     border-radius: 30px;
 }
-.landing a.button-black {
+.landing .button-black {
     background-color: var(--compliment-color);
     color: var(--text-color);
 }
-.landing a.button-white {
+.landing .button-white {
     background-color: var(--smoke-white);
     color: var(--compliment-color);
 }
@@ -325,20 +325,23 @@ a.active, p.active{
     display: flex;
     justify-content: space-between;
 }
-.tournament-card-desc a{
+.tournament-card-desc a, .tournament-card-desc button{
     padding: 1em 2em;
     border-radius: 30px;
 }
-.tournament-card-desc a.button-black {
+.tournament-card-desc .button-black {
     background-color: var(--main-color);
+    border: 1px solid var(--main-color);
     color: var(--text-color);
 }
-.tournament-card-desc a.button-white {
+.tournament-card-desc .button-white {
     background-color: red;
+    border: 1px solid var(--smoke-white);
     color: var(--smoke-white);
 }
-.tournament-card-desc a:hover{
-    font-size: 1.04em;
+.tournament-card-desc a:hover, .tournament-card-desc button:hover {
+    font-size: 14px;
+    cursor: pointer;
 }
 
 .profile{

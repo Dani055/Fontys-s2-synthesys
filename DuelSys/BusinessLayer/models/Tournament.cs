@@ -9,6 +9,7 @@ namespace BusinessLayer.models
     public class Tournament
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public string SportName { get; set; }
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
@@ -23,9 +24,10 @@ namespace BusinessLayer.models
         {
 
         }
-        public Tournament(int id, string sportname, string description, DateTime startdate, DateTime enddate, int minplayers, int maxplayers, string location, string systemname, bool hasstarted)
+        public Tournament(int id, string name, string sportname, string description, DateTime startdate, DateTime enddate, int minplayers, int maxplayers, string location, string systemname, bool hasstarted)
         {
             Id = id;
+            Name = name;
             SportName = sportname;
             Description = description;
             StartDate = startdate;

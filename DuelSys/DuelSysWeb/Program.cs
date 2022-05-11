@@ -13,13 +13,18 @@ builder.Services.AddNotyf(config => { config.DurationInSeconds = 5; config.IsDis
 
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.IdleTimeout = TimeSpan.FromMinutes(60);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
 
+builder.Services.AddSingleton<IDALTournament, DALTournament>();
 builder.Services.AddSingleton<IDALUser, DALUser>();
+
+builder.Services.AddSingleton<TournamentValidator>();
 builder.Services.AddSingleton<UserValidator>();
+
+builder.Services.AddScoped<TournamentService>();
 builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();

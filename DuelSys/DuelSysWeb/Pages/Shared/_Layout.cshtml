@@ -35,7 +35,7 @@
                 <nav>
                     <ul>
                         <li>
-                            <a asp-page="/Tournament/ViewTournaments">Tournaments</a>
+                            <a asp-page="/Tournaments/ViewTournaments" asp-route-status="Pending">Tournaments</a>
                         </li>
                         @if (Context.Session.GetLoggedUser() != null)
                         {

@@ -33,6 +33,7 @@
             this.btnLogout = new System.Windows.Forms.Button();
             this.lvTournaments = new System.Windows.Forms.ListView();
             this.colId = new System.Windows.Forms.ColumnHeader();
+            this.colName = new System.Windows.Forms.ColumnHeader();
             this.colSport = new System.Windows.Forms.ColumnHeader();
             this.colDesc = new System.Windows.Forms.ColumnHeader();
             this.colStartDate = new System.Windows.Forms.ColumnHeader();
@@ -52,12 +53,13 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTime = new System.Windows.Forms.Label();
             this.tmr = new System.Windows.Forms.Timer(this.components);
+            this.btnEndTourneys = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnLogout
             // 
-            this.btnLogout.Location = new System.Drawing.Point(1152, 12);
+            this.btnLogout.Location = new System.Drawing.Point(1252, 12);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(101, 40);
             this.btnLogout.TabIndex = 6;
@@ -69,6 +71,7 @@
             // 
             this.lvTournaments.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colId,
+            this.colName,
             this.colSport,
             this.colDesc,
             this.colStartDate,
@@ -80,7 +83,7 @@
             this.colSystem});
             this.lvTournaments.Location = new System.Drawing.Point(12, 12);
             this.lvTournaments.Name = "lvTournaments";
-            this.lvTournaments.Size = new System.Drawing.Size(1052, 411);
+            this.lvTournaments.Size = new System.Drawing.Size(1167, 411);
             this.lvTournaments.TabIndex = 7;
             this.lvTournaments.UseCompatibleStateImageBehavior = false;
             this.lvTournaments.View = System.Windows.Forms.View.Details;
@@ -89,6 +92,11 @@
             // 
             this.colId.Text = "ID";
             this.colId.Width = 50;
+            // 
+            // colName
+            // 
+            this.colName.Text = "Name";
+            this.colName.Width = 120;
             // 
             // colSport
             // 
@@ -147,10 +155,11 @@
             this.cbxTourneyStatus.Name = "cbxTourneyStatus";
             this.cbxTourneyStatus.Size = new System.Drawing.Size(151, 28);
             this.cbxTourneyStatus.TabIndex = 8;
+            this.cbxTourneyStatus.SelectedIndexChanged += new System.EventHandler(this.cbxTourneyStatus_SelectedIndexChanged);
             // 
             // btnRegisterStaff
             // 
-            this.btnRegisterStaff.Location = new System.Drawing.Point(1085, 71);
+            this.btnRegisterStaff.Location = new System.Drawing.Point(1185, 71);
             this.btnRegisterStaff.Name = "btnRegisterStaff";
             this.btnRegisterStaff.Size = new System.Drawing.Size(168, 53);
             this.btnRegisterStaff.TabIndex = 9;
@@ -189,7 +198,7 @@
             // 
             // btnStartTourneys
             // 
-            this.btnStartTourneys.Location = new System.Drawing.Point(1085, 145);
+            this.btnStartTourneys.Location = new System.Drawing.Point(1185, 145);
             this.btnStartTourneys.Name = "btnStartTourneys";
             this.btnStartTourneys.Size = new System.Drawing.Size(168, 76);
             this.btnStartTourneys.TabIndex = 13;
@@ -209,7 +218,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(830, 445);
+            this.pictureBox1.Location = new System.Drawing.Point(955, 445);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(398, 118);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -222,7 +231,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTime.AutoSize = true;
             this.lblTime.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTime.Location = new System.Drawing.Point(1085, 240);
+            this.lblTime.Location = new System.Drawing.Point(1185, 327);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(168, 50);
             this.lblTime.TabIndex = 16;
@@ -233,11 +242,21 @@
             this.tmr.Interval = 1000;
             this.tmr.Tick += new System.EventHandler(this.tmr_Tick);
             // 
+            // btnEndTourneys
+            // 
+            this.btnEndTourneys.Location = new System.Drawing.Point(1185, 239);
+            this.btnEndTourneys.Name = "btnEndTourneys";
+            this.btnEndTourneys.Size = new System.Drawing.Size(168, 76);
+            this.btnEndTourneys.TabIndex = 17;
+            this.btnEndTourneys.Text = "Conclude ended tournaments";
+            this.btnEndTourneys.UseVisualStyleBackColor = true;
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1265, 590);
+            this.ClientSize = new System.Drawing.Size(1365, 590);
+            this.Controls.Add(this.btnEndTourneys);
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnViewTourney);
@@ -283,5 +302,7 @@
         private PictureBox pictureBox1;
         private Label lblTime;
         private System.Windows.Forms.Timer tmr;
+        private Button btnEndTourneys;
+        private ColumnHeader colName;
     }
 }

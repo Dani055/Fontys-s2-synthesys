@@ -57,6 +57,9 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.btnCreateTourney = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
+            this.tbName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.tbMinPlayers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbMaxPlayers)).BeginInit();
             this.SuspendLayout();
@@ -67,7 +70,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(448, 411);
+            this.label9.Location = new System.Drawing.Point(448, 470);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(148, 20);
             this.label9.TabIndex = 77;
@@ -78,7 +81,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(136, 316);
+            this.label6.Location = new System.Drawing.Point(136, 388);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(20, 25);
             this.label6.TabIndex = 76;
@@ -107,7 +110,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(141, 103);
+            this.label2.Location = new System.Drawing.Point(141, 175);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(20, 25);
             this.label2.TabIndex = 71;
@@ -118,7 +121,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(102, 39);
+            this.label1.Location = new System.Drawing.Point(102, 111);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(20, 25);
             this.label1.TabIndex = 70;
@@ -127,7 +130,7 @@
             // lblStartDate
             // 
             this.lblStartDate.AutoSize = true;
-            this.lblStartDate.Location = new System.Drawing.Point(59, 244);
+            this.lblStartDate.Location = new System.Drawing.Point(59, 316);
             this.lblStartDate.Name = "lblStartDate";
             this.lblStartDate.Size = new System.Drawing.Size(74, 20);
             this.lblStartDate.TabIndex = 69;
@@ -137,7 +140,7 @@
             // 
             this.lblEndDate.AutoSize = true;
             this.lblEndDate.ForeColor = System.Drawing.Color.Black;
-            this.lblEndDate.Location = new System.Drawing.Point(62, 315);
+            this.lblEndDate.Location = new System.Drawing.Point(62, 387);
             this.lblEndDate.Name = "lblEndDate";
             this.lblEndDate.Size = new System.Drawing.Size(68, 20);
             this.lblEndDate.TabIndex = 67;
@@ -169,7 +172,7 @@
             this.cbSport.FormattingEnabled = true;
             this.cbSport.Items.AddRange(new object[] {
             "Badminton"});
-            this.cbSport.Location = new System.Drawing.Point(60, 67);
+            this.cbSport.Location = new System.Drawing.Point(60, 139);
             this.cbSport.Name = "cbSport";
             this.cbSport.Size = new System.Drawing.Size(256, 28);
             this.cbSport.TabIndex = 64;
@@ -178,7 +181,7 @@
             // 
             this.lblDesc.AutoSize = true;
             this.lblDesc.ForeColor = System.Drawing.Color.Black;
-            this.lblDesc.Location = new System.Drawing.Point(60, 104);
+            this.lblDesc.Location = new System.Drawing.Point(60, 176);
             this.lblDesc.Name = "lblDesc";
             this.lblDesc.Size = new System.Drawing.Size(85, 20);
             this.lblDesc.TabIndex = 63;
@@ -188,7 +191,7 @@
             // 
             this.lblSport.AutoSize = true;
             this.lblSport.ForeColor = System.Drawing.Color.Black;
-            this.lblSport.Location = new System.Drawing.Point(60, 39);
+            this.lblSport.Location = new System.Drawing.Point(60, 111);
             this.lblSport.Name = "lblSport";
             this.lblSport.Size = new System.Drawing.Size(45, 20);
             this.lblSport.TabIndex = 62;
@@ -232,7 +235,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(139, 244);
+            this.label7.Location = new System.Drawing.Point(139, 316);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(20, 25);
             this.label7.TabIndex = 79;
@@ -242,7 +245,7 @@
             // 
             this.tbDesc.BackColor = System.Drawing.Color.Gainsboro;
             this.tbDesc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbDesc.Location = new System.Drawing.Point(59, 131);
+            this.tbDesc.Location = new System.Drawing.Point(59, 203);
             this.tbDesc.Name = "tbDesc";
             this.tbDesc.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
             this.tbDesc.Size = new System.Drawing.Size(257, 92);
@@ -253,7 +256,7 @@
             // 
             this.dtStart.CalendarMonthBackground = System.Drawing.Color.Gainsboro;
             this.dtStart.CalendarTitleBackColor = System.Drawing.Color.Gainsboro;
-            this.dtStart.Location = new System.Drawing.Point(59, 267);
+            this.dtStart.Location = new System.Drawing.Point(59, 339);
             this.dtStart.Name = "dtStart";
             this.dtStart.Size = new System.Drawing.Size(257, 27);
             this.dtStart.TabIndex = 82;
@@ -262,7 +265,7 @@
             // 
             this.dtEnd.CalendarMonthBackground = System.Drawing.Color.Gainsboro;
             this.dtEnd.CalendarTitleBackColor = System.Drawing.Color.Gainsboro;
-            this.dtEnd.Location = new System.Drawing.Point(59, 338);
+            this.dtEnd.Location = new System.Drawing.Point(59, 410);
             this.dtEnd.Name = "dtEnd";
             this.dtEnd.Size = new System.Drawing.Size(257, 27);
             this.dtEnd.TabIndex = 83;
@@ -346,7 +349,7 @@
             this.btnCreateTourney.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreateTourney.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnCreateTourney.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnCreateTourney.Location = new System.Drawing.Point(0, 446);
+            this.btnCreateTourney.Location = new System.Drawing.Point(0, 505);
             this.btnCreateTourney.Name = "btnCreateTourney";
             this.btnCreateTourney.Size = new System.Drawing.Size(623, 49);
             this.btnCreateTourney.TabIndex = 91;
@@ -354,11 +357,43 @@
             this.btnCreateTourney.UseVisualStyleBackColor = false;
             this.btnCreateTourney.Click += new System.EventHandler(this.btnCreateTourney_Click);
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label12.ForeColor = System.Drawing.Color.Red;
+            this.label12.Location = new System.Drawing.Point(110, 46);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(20, 25);
+            this.label12.TabIndex = 94;
+            this.label12.Text = "*";
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(59, 49);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(49, 20);
+            this.lblName.TabIndex = 93;
+            this.lblName.Text = "Name";
+            // 
+            // tbName
+            // 
+            this.tbName.BackColor = System.Drawing.Color.Gainsboro;
+            this.tbName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbName.Location = new System.Drawing.Point(59, 72);
+            this.tbName.Name = "tbName";
+            this.tbName.Size = new System.Drawing.Size(192, 27);
+            this.tbName.TabIndex = 92;
+            // 
             // CreateTournament
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(623, 495);
+            this.ClientSize = new System.Drawing.Size(623, 554);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.lblName);
+            this.Controls.Add(this.tbName);
             this.Controls.Add(this.btnCreateTourney);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
@@ -427,5 +462,8 @@
         private Label label10;
         private Label label11;
         private Button btnCreateTourney;
+        private Label label12;
+        private Label lblName;
+        private TextBox tbName;
     }
 }

@@ -26,6 +26,7 @@ namespace DuelSysDesktop.forms
 
         private void btnCreateTourney_Click(object sender, EventArgs e)
         {
+            string name = tbName.Text;
             string sport = cbSport.SelectedItem.ToString();
             string description = tbDesc.Text;
             DateTime startDate = dtStart.Value;
@@ -38,6 +39,7 @@ namespace DuelSysDesktop.forms
 
             Tournament tourney = new Tournament()
             {
+                Name = name,
                 SportName = sport,
                 Description = description,
                 StartDate = startDate,

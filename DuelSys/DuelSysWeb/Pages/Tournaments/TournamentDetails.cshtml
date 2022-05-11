@@ -1,37 +1,64 @@
-﻿@page
-@model DuelSysWeb.Pages.Tournament.TournamentDetailsModel
+﻿@page "{tournamentId}"
+@using BusinessLayer.models
+@using BusinessLayer
+@model DuelSysWeb.Pages.Tournaments.TournamentDetailsModel
 @{
 }
 <div class="wrapper">
     <div class="tournament-details">
         <div class="tournament-main-info">
-            <h2><span class="green">Eindhoven annual badminton tournament</span></h2>
-            <h3><span class="green">System:</span> Round robin</h3>
-            <h3><span class="green">Location:</span> Eindhoven</h3>
+            <h2><span class="green">@Model.tourney.Name</span></h2>
+            <h3><span class="green">System:</span> @Model.tourney.SystemName</h3>
+            <h3><span class="green">Location:</span> @Model.tourney.Location</h3>
         </div>
         <div class="tournament-side-info">
             <div class="tournament-card-desc">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, laborum reprehenderit architecto amet fuga atque! Cum distinctio nihil ipsam quisquam reprehenderit quod, ex nisi voluptas explicabo maiores dicta pariatur obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia reprehenderit eum repellendus rem mollitia sit rerum sint fugit adipisci modi eligendi, dolor necessitatibus tempora minus aut, id facere quisquam autem!</p>
+                <p>@Model.tourney.Description</p>
             </div>
             <div class="tournament-card-desc">
-                <p>1.5.2022 → 15.5.2022</p>
-            </div>
-            <div class="tournament-card-desc">
-                <div class="desc-align-left">
-                    <p>Players Min: 2</p>
-                </div>
-                <div class="desc-align-right">
-                    <p>Players Max: 4</p>
-                </div>
+                <p>@Model.tourney.StartDate.Date.ToShortDateString() → @Model.tourney.EndDate.Date.ToShortDateString()</p>
             </div>
             <div class="tournament-card-desc">
                 <div class="desc-align-left">
-                    <a href="" class="button-black">Register</a>
+                    <p>Players Min: @Model.tourney.MinPlayers</p>
                 </div>
                 <div class="desc-align-right">
-                    <a href="" class="button-white">Deregister</a>
+                    <p>Players Max: @Model.tourney.MaxPlayers</p>
                 </div>
             </div>
+            @if (HttpContext.Session.GetLoggedUser() == null)
+            {
+                <h2><span class="red">You need to log in to register for tournaments</span></h2>
+            }
+            else if (HttpContext.Session.GetLoggedUser() != null && HttpContext.Session.GetLoggedUser() is Player)
+            {
+                if (Utils.GetSystemDate > Model.tourney.StartDate)
+                {
+                    <h2><span class="red">You can no longer register for this tournament</span></h2>
+                }
+                else
+                {
+                    <div class="tournament-card-desc">
+                        <div class="desc-align-left">
+                            <form method="post">
+                                <button type="submit" asp-page-handler="OnRegister" class="button-black">Register</button>
+                            </form>
+                            
+                        </div>
+                        <div class="desc-align-right">
+                            <form method="post"> 
+                                 <button type="submit" asp-page-handler="OnDeregister" class="button-white">Deregister</button>
+                            </form>
+
+                        </div>
+                    </div>
+                }
+            }
+            else if(HttpContext.Session.GetLoggedUser() is Staff)
+            {
+                <h2><span class="red">You are a staff member. Only players can register for tournaments</span></h2>
+            }
+            
         </div>
         <div class="tournament-standings">
             <h3>Standings:</h3>

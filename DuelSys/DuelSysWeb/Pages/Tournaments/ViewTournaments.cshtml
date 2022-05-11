@@ -1,0 +1,66 @@
+﻿@page
+@using BusinessLayer.models
+@model DuelSysWeb.Pages.Tournaments.ViewTournamentsModel
+@{
+}
+
+<div class="wrapper">
+    <div class="content-header">
+        <h2>Tournaments</h2>
+        <div class="sort-links">
+            @{
+                string pendingStyle = (Model.status == "Pending") ? "active" : "";
+                string ongoingStyle = (Model.status == "Ongoing") ? "active" : "";
+                string ednedStyle = (Model.status == "Ended") ? "active" : "";
+            }
+            <a asp-route-status="Pending" class="@pendingStyle">Pending</a>
+            <a asp-route-status="Ongoing" class="@ongoingStyle">Ongoing</a>
+            <a asp-route-status="Ended" class="@ednedStyle">Ended</a>
+        </div>
+    </div>
+    <div class="tournaments">
+        @foreach (Tournament t in Model.tourneys)
+        {
+            <div class="tournament-card">
+            <div class="tournament-card-header">
+                <a asp-page="/Tournaments/TournamentDetails" asp-route-tournamentId="@t.Id">@t.Name</a>
+            </div>
+            <div class="tournament-card-content">
+                <div class="tournament-card-desc desc-border-bottom">
+                    <h3>
+                        <span class="green">@t.SportName</span>        
+                    </h3>
+                </div>
+                <div class="tournament-card-desc desc-border-bottom">
+                    <p>
+                        @t.Description
+                    </p>
+                </div>
+                <div class="tournament-card-desc desc-border-bottom">
+                    <div class="desc-align-left">
+                        <p>Players: Min. @t.MinPlayers Max @t.MaxPlayers</p>
+                    </div>
+                    <div class="desc-align-right">
+                        <p>
+                            Location: @t.Location
+                        </p>      
+                    </div>
+                </div>
+                <div class="tournament-card-desc">
+                    <div class="desc-align-left">
+                        <p>Tournament system: @t.SystemName</p>
+                    </div>
+                    <div class="desc-align-right">
+                        <p class="active">
+                            @t.StartDate.Date.ToShortDateString() → @t.EndDate.Date.ToShortDateString()
+                        </p>    
+                    </div>
+                </div>
+            </div>
+            </div>
+        }        
+    </div>
+    <div class="row">
+        <a href="#">Load more...</a>
+    </div>
+</div>

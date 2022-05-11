@@ -30,5 +30,39 @@ namespace BusinessLayer.services
             return _dalTournament.CreateTournament(tourney);
 
         }
+
+        public Tournament GetTournamentById(int id)
+        {
+            return _dalTournament.GetTournamentById(id);
+        }
+
+        public List<Tournament> GetTournaments(string status)
+        {
+            if (status == "Pending")
+            {
+                return _dalTournament.GetPendingTournaments();
+            }
+            else if (status == "Ongoing")
+            {
+                return _dalTournament.GetOngoingTournaments();
+            }
+            else
+            {
+                return _dalTournament.GetEndedTournaments();
+            }
+        }
+        public bool RegisterPlayerForTournament(int tourneyId, int playerId)
+        {
+            TourneyStanding ts = _dalTournament.GetTournamentStanding(tourneyId, playerId);
+            if (ts != null)
+            {
+                throw new Exception("You are already registered for this tournament!");
+            }
+            else
+            {
+                return _dalTournament.RegisterPlayerForTournament(tourneyId, playerId);
+            }
+
+        }
     }
 }

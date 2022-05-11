@@ -12,7 +12,11 @@ namespace BusinessLayer.validators
     {
         public bool ValidateTournament(Tournament tourney)
         {
-            if (String.IsNullOrEmpty(tourney.SportName))
+            if (String.IsNullOrEmpty(tourney.Name))
+            {
+                throw new Exception("You must enter a tournament name!");
+            }
+            else if (String.IsNullOrEmpty(tourney.SportName))
             {
                 throw new Exception("You must select a sport for the tournament!");
             }
@@ -24,9 +28,9 @@ namespace BusinessLayer.validators
             {
                 throw new Exception("Invalid starting/ending dates. Make sure the tournament starts at least today and the start date is not bigger than the end date.");
             }
-            else if (tourney.MinPlayers <= 2 || tourney.MaxPlayers <= 2)
+            else if (tourney.MinPlayers < 2 || tourney.MaxPlayers < 2)
             {
-                throw new Exception("Min. and max players must be more than 2");
+                throw new Exception("Min. and max players must be at least 2");
             }
             else if (String.IsNullOrEmpty(tourney.Location))
             {
