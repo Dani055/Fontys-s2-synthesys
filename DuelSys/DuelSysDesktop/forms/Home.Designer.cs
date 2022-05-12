@@ -48,12 +48,12 @@
             this.btnCreateTouney = new System.Windows.Forms.Button();
             this.btnEditTourney = new System.Windows.Forms.Button();
             this.btnDelTourney = new System.Windows.Forms.Button();
-            this.btnStartTourneys = new System.Windows.Forms.Button();
             this.btnViewTourney = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblTime = new System.Windows.Forms.Label();
             this.tmr = new System.Windows.Forms.Timer(this.components);
-            this.btnEndTourneys = new System.Windows.Forms.Button();
+            this.btnStartTournament = new System.Windows.Forms.Button();
+            this.btnEndTournament = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -196,15 +196,6 @@
             this.btnDelTourney.Text = "Delete tournament";
             this.btnDelTourney.UseVisualStyleBackColor = true;
             // 
-            // btnStartTourneys
-            // 
-            this.btnStartTourneys.Location = new System.Drawing.Point(1185, 145);
-            this.btnStartTourneys.Name = "btnStartTourneys";
-            this.btnStartTourneys.Size = new System.Drawing.Size(168, 76);
-            this.btnStartTourneys.TabIndex = 13;
-            this.btnStartTourneys.Text = "Start pending tournaments";
-            this.btnStartTourneys.UseVisualStyleBackColor = true;
-            // 
             // btnViewTourney
             // 
             this.btnViewTourney.Location = new System.Drawing.Point(459, 495);
@@ -231,7 +222,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTime.AutoSize = true;
             this.lblTime.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTime.Location = new System.Drawing.Point(1185, 327);
+            this.lblTime.Location = new System.Drawing.Point(1185, 320);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(168, 50);
             this.lblTime.TabIndex = 16;
@@ -242,25 +233,34 @@
             this.tmr.Interval = 1000;
             this.tmr.Tick += new System.EventHandler(this.tmr_Tick);
             // 
-            // btnEndTourneys
+            // btnStartTournament
             // 
-            this.btnEndTourneys.Location = new System.Drawing.Point(1185, 239);
-            this.btnEndTourneys.Name = "btnEndTourneys";
-            this.btnEndTourneys.Size = new System.Drawing.Size(168, 76);
-            this.btnEndTourneys.TabIndex = 17;
-            this.btnEndTourneys.Text = "Conclude ended tournaments";
-            this.btnEndTourneys.UseVisualStyleBackColor = true;
+            this.btnStartTournament.Location = new System.Drawing.Point(1185, 154);
+            this.btnStartTournament.Name = "btnStartTournament";
+            this.btnStartTournament.Size = new System.Drawing.Size(168, 58);
+            this.btnStartTournament.TabIndex = 25;
+            this.btnStartTournament.Text = "Generate tournament schedule";
+            this.btnStartTournament.UseVisualStyleBackColor = true;
+            // 
+            // btnEndTournament
+            // 
+            this.btnEndTournament.Location = new System.Drawing.Point(1185, 238);
+            this.btnEndTournament.Name = "btnEndTournament";
+            this.btnEndTournament.Size = new System.Drawing.Size(168, 57);
+            this.btnEndTournament.TabIndex = 27;
+            this.btnEndTournament.Text = "Conclude tournament";
+            this.btnEndTournament.UseVisualStyleBackColor = true;
             // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1365, 590);
-            this.Controls.Add(this.btnEndTourneys);
+            this.Controls.Add(this.btnEndTournament);
+            this.Controls.Add(this.btnStartTournament);
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnViewTourney);
-            this.Controls.Add(this.btnStartTourneys);
             this.Controls.Add(this.btnDelTourney);
             this.Controls.Add(this.btnEditTourney);
             this.Controls.Add(this.btnCreateTouney);
@@ -297,12 +297,12 @@
         private Button btnCreateTouney;
         private Button btnEditTourney;
         private Button btnDelTourney;
-        private Button btnStartTourneys;
         private Button btnViewTourney;
         private PictureBox pictureBox1;
         private Label lblTime;
         private System.Windows.Forms.Timer tmr;
-        private Button btnEndTourneys;
         private ColumnHeader colName;
+        private Button btnStartTournament;
+        private Button btnEndTournament;
     }
 }

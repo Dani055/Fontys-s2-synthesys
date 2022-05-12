@@ -179,7 +179,7 @@ namespace DAL.layers
             {
                 string now = Utils.GetSystemDate.Date.ToString("yyyy-MM-dd");
 
-                string sql = "SELECT * FROM s2synt_tournament where end_date <= @now";
+                string sql = "SELECT * FROM s2synt_tournament where end_date < @now";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 conn.Open();
