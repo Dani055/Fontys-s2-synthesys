@@ -81,7 +81,10 @@
             this.colMaxPlayers,
             this.colLoc,
             this.colSystem});
+            this.lvTournaments.FullRowSelect = true;
+            this.lvTournaments.GridLines = true;
             this.lvTournaments.Location = new System.Drawing.Point(12, 12);
+            this.lvTournaments.MultiSelect = false;
             this.lvTournaments.Name = "lvTournaments";
             this.lvTournaments.Size = new System.Drawing.Size(1167, 411);
             this.lvTournaments.TabIndex = 7;
@@ -195,6 +198,7 @@
             this.btnDelTourney.TabIndex = 12;
             this.btnDelTourney.Text = "Delete tournament";
             this.btnDelTourney.UseVisualStyleBackColor = true;
+            this.btnDelTourney.Click += new System.EventHandler(this.btnDelTourney_Click);
             // 
             // btnViewTourney
             // 

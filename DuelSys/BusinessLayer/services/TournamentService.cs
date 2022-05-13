@@ -30,7 +30,38 @@ namespace BusinessLayer.services
             return _dalTournament.CreateTournament(tourney);
 
         }
+        
+        public bool EditTournament(Tournament tourney, User loggedUser)
+        {
+            if (!loggedUser.Role.CanAccessTournamentCUD())
+            {
+                throw new Exception("You are not authorized to edit a tournament!");
+            }
+            else if (CheckIfTournamentBeginsInOneWeek(tourney))
+            {
+                throw new Exception("Tournament cannot be edited because it begins in less than one week");
+            }
+            _tournamentValidator.ValidateTournament(tourney);
 
+            return _dalTournament.EditTournament(tourney);
+
+        }
+        public bool DeleteTournament(int id, User loggedUser)
+        {
+            if (!loggedUser.Role.CanAccessTournamentCUD())
+            {
+                throw new Exception("You are not authorized to delete a tournament!");
+            }
+            return _dalTournament.DeleteTournament(id);
+        }
+        public bool CheckIfTournamentBeginsInOneWeek(Tournament tourney)
+        {
+            if (Utils.GetSystemDate >= tourney.StartDate.AddDays(-7))
+            {
+                return true;
+            }
+            return false;
+        }
         public Tournament GetTournamentById(int id)
         {
             return _dalTournament.GetTournamentById(id);
@@ -51,18 +82,47 @@ namespace BusinessLayer.services
                 return _dalTournament.GetEndedTournaments();
             }
         }
-        public bool RegisterPlayerForTournament(int tourneyId, int playerId)
+        public bool RegisterPlayerForTournament(int tournamentId, int playerId)
         {
-            TourneyStanding ts = _dalTournament.GetTournamentStanding(tourneyId, playerId);
-            if (ts != null)
+            Tournament tourney = _dalTournament.GetTournamentById(tournamentId);
+
+            TourneyStanding ts = _dalTournament.GetTournamentStanding(tourney.Id, playerId);
+            if (CheckIfTournamentBeginsInOneWeek(tourney))
+            {
+                throw new Exception("Register unsuccessful. Tournament starts in less than 1 week.");
+            }
+            else if (ts != null)
             {
                 throw new Exception("You are already registered for this tournament!");
             }
+            //Query checks if the maximum players are more than the current registered. This prevents SOME concurrency
             else
             {
-                return _dalTournament.RegisterPlayerForTournament(tourneyId, playerId);
+                return _dalTournament.RegisterPlayerForTournament(tourney.Id, playerId);
             }
 
+        }
+        public bool DeregisterPlayerForTournament(int tournamentId, int playerId)
+        {
+            Tournament tourney = _dalTournament.GetTournamentById(tournamentId);
+
+            TourneyStanding ts = _dalTournament.GetTournamentStanding(tourney.Id, playerId);
+            if (ts == null)
+            {
+                throw new Exception("You are not registered for this tournament!");
+            }
+            else if (CheckIfTournamentBeginsInOneWeek(tourney))
+            {
+                throw new Exception("Deregister unsuccessful. Tournament starts in less than 1 week.");
+            }
+            else
+            {
+                return _dalTournament.DeregisterPlayerForTournament(tournamentId, playerId);
+            }
+        }
+        public List<TourneyStanding> GetTournamentStandings(int tourneyId)
+        {
+            return _dalTournament.GetTournamentStandings(tourneyId);
         }
     }
 }

@@ -90,7 +90,13 @@ namespace DuelSysDesktop.forms
 
         private void btnEditTourney_Click(object sender, EventArgs e)
         {
-            EditTournament et = new EditTournament();
+            Tournament tourney = lvTournaments.SelectedItems[0].Tag as Tournament;
+            if (_tournamentService.CheckIfTournamentBeginsInOneWeek(tourney))
+            {
+                DesktopUtils.ShowError("Tournament begins in less than one week and cannot be edited!");
+                return;
+            }
+            EditTournament et = new EditTournament(tourney.Id);
             et.ShowDialog();
         }
 
@@ -103,6 +109,30 @@ namespace DuelSysDesktop.forms
         private void cbxTourneyStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadTournaments(cbxTourneyStatus.SelectedItem.ToString());
+        }
+
+        private void btnDelTourney_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int tourneyId = Convert.ToInt16(lvTournaments.SelectedItems[0].Text);
+                DialogResult dr = DesktopUtils.ShowConfirmation("Are you sure you want to delete this tournament? This action cannot be undone!");
+                if (dr == DialogResult.OK)
+                {
+                    bool result = _tournamentService.DeleteTournament(tourneyId, DesktopUtils.loggedUser);
+                    if (result)
+                    {
+                        DesktopUtils.ShowInfo("Tournament deleted");
+                    }
+                    LoadTournaments(cbxTourneyStatus.SelectedIndex.ToString());
+                }
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                DesktopUtils.ShowError("Select tournament to delete!");
+                return;
+            }
+            
         }
     }
 }

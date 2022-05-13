@@ -45,7 +45,52 @@ namespace DAL.layers
                 conn.Close();
             }
         }
+        public bool EditTournament(Tournament tourney)
+        {
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
+            try
+            {
+                string sql = "UPDATE s2synt_tournament SET name = @name, sport_id = @sport_id, description = @description, start_date = @start_date, end_date = @end_date, min_players = @min_players, max_players = @max_players, location = @location, system_id = @system_id, hasStarted = @hasStarted WHERE id = @id";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
 
+                cmd.Parameters.AddWithValue("@id", tourney.Id);
+                cmd.Parameters.AddWithValue("@name", tourney.Name);
+                cmd.Parameters.AddWithValue("@sport_id", Array.IndexOf(DBEnums.Sports, tourney.SportName));
+                cmd.Parameters.AddWithValue("@description", tourney.Description);
+                cmd.Parameters.AddWithValue("@start_date", tourney.StartDate.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@end_date", tourney.EndDate.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@min_players", tourney.MinPlayers);
+                cmd.Parameters.AddWithValue("@max_players", tourney.MaxPlayers);
+                cmd.Parameters.AddWithValue("@location", tourney.Location);
+                cmd.Parameters.AddWithValue("@system_id", Array.IndexOf(DBEnums.TournamentSystems, tourney.SystemName));
+                cmd.Parameters.AddWithValue("@hasStarted", tourney.HasStarted);
+                conn.Open();
+                int result = cmd.ExecuteNonQuery();
+                return true;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        public bool DeleteTournament(int tourneyId)
+        {
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
+            try
+            {
+                string sql = "DELETE FROM s2synt_tournament where id = @id";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@id", tourneyId);
+                conn.Open();
+
+                int result = cmd.ExecuteNonQuery();
+                return true;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
         public Tournament GetTournamentById(int id)
         {
             MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
@@ -95,10 +140,14 @@ namespace DAL.layers
             MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
-                string sql = "SELECT * FROM s2synt_tournament where hasStarted = FALSE";
+                string sql = "SELECT * FROM s2synt_tournament where start_date > @now order by id desc";
+                string now = Utils.GetSystemDate.Date.ToString("yyyy-MM-dd");
+
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 conn.Open();
+                cmd.Parameters.AddWithValue("@now", now);
+
                 MySqlDataReader reader = cmd.ExecuteReader();
                 List<Tournament> tourneys = new List<Tournament>();
 
@@ -136,7 +185,7 @@ namespace DAL.layers
             {
                 string now = Utils.GetSystemDate.Date.ToString("yyyy-MM-dd");
 
-                string sql = "SELECT * FROM s2synt_tournament where start_date <= @now and end_date >= @now";
+                string sql = "SELECT * FROM s2synt_tournament where start_date <= @now and end_date >= @now order by id desc";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 conn.Open();
@@ -179,7 +228,7 @@ namespace DAL.layers
             {
                 string now = Utils.GetSystemDate.Date.ToString("yyyy-MM-dd");
 
-                string sql = "SELECT * FROM s2synt_tournament where end_date < @now";
+                string sql = "SELECT * FROM s2synt_tournament where end_date < @now order by id desc";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 conn.Open();
@@ -220,7 +269,9 @@ namespace DAL.layers
             MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
-                string sql = "INSERT INTO s2synt_tourney_standings (tournament_id, player_id) VALUES(@tournament_id, @player_id); ";
+                //Query checks if the maximum players are more than the current registered. This prevents concurrency
+                string sql = "INSERT INTO s2synt_tourney_standings (tournament_id, player_id) select @tournament_id,@player_id where " +
+                    "((select max_players from s2synt_tournament where id = @tournament_id) > (select count(*) from s2synt_tourney_standings where tournament_id = @tournament_id))";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 cmd.Parameters.AddWithValue("@tournament_id", tourneyId);
@@ -228,7 +279,40 @@ namespace DAL.layers
                 
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
-                return true;
+                if (result == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        public bool DeregisterPlayerForTournament(int tourneyId, int playerId)
+        {
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
+            try
+            {
+                string sql = "DELETE FROM s2synt_tourney_standings WHERE tournament_id = @tournament_id and player_id = @player_id";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@tournament_id", tourneyId);
+                cmd.Parameters.AddWithValue("@player_id", playerId);
+
+                conn.Open();
+                int result = cmd.ExecuteNonQuery();
+                if (result == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             finally
             {
@@ -275,6 +359,49 @@ namespace DAL.layers
                     reader.Close();
                     return null;
                 }
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public List<TourneyStanding> GetTournamentStandings(int tourneyId)
+        {
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
+            try
+            {
+                string sql = "SELECT ts.Id, ts.tournament_id, ts.player_id, ts.wins, ts.losses, ts.status, ts.place, u.first_name, u.last_name " +
+                    "FROM s2synt_tourney_standings as ts " +
+                    "inner join s2synt_user as u " +
+                    "on ts.player_id = u.id WHERE tournament_id = @tournament_id";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@tournament_id", tourneyId);
+                conn.Open();
+
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                List<TourneyStanding> list = new List<TourneyStanding>();
+                while (reader.Read())
+                {
+                    
+                    int Id = reader.GetInt32("Id");
+                    int tournamentId = reader.GetInt32("tournament_id");
+                    int playerid = reader.GetInt32("player_id");
+                    int wins = reader.GetInt32("wins");
+                    int losses = reader.GetInt32("losses");
+                    string status = reader.GetString("status");
+                    int place = int.Parse(reader["wins"].ToString());
+                    string playerfirstname = reader.GetString("first_name");
+                    string playerlastname = reader.GetString("last_name");
+
+                    TourneyStanding ts = new TourneyStanding(Id, tournamentId, playerid, playerfirstname, playerlastname, wins, losses, status, place);
+                    list.Add(ts);
+                    
+                }
+                reader.Close();
+                return list;
             }
             finally
             {

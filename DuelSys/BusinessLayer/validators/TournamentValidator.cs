@@ -24,9 +24,9 @@ namespace BusinessLayer.validators
             {
                 throw new Exception("You must enter a tournament description!");
             }
-            else if (tourney.StartDate >= tourney.EndDate || tourney.StartDate.Date < Utils.GetSystemDate.Date)
+            else if (tourney.StartDate >= tourney.EndDate || tourney.StartDate.Date.AddDays(-7) <= Utils.GetSystemDate.Date)
             {
-                throw new Exception("Invalid starting/ending dates. Make sure the tournament starts at least today and the start date is not bigger than the end date.");
+                throw new Exception("Invalid starting/ending dates. Make sure the tournament starts in at least 1 week and the start date is not bigger than the end date.");
             }
             else if (tourney.MinPlayers < 2 || tourney.MaxPlayers < 2)
             {

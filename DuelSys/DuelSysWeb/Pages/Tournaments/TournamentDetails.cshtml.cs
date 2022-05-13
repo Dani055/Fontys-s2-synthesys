@@ -10,7 +10,10 @@ namespace DuelSysWeb.Pages.Tournaments
     {
         private readonly INotyfService _notyf;
         private readonly TournamentService _tournamentService;
+
+        [BindProperty]
         public Tournament tourney { get; set; }
+        public List<TourneyStanding> standings { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public int tournamentId { get; set; }
@@ -29,6 +32,7 @@ namespace DuelSysWeb.Pages.Tournaments
                     _notyf.Error("Resource not found!");
                     return RedirectToPage("/Tournaments/ViewTournaments");
                 }
+                standings = _tournamentService.GetTournamentStandings(tournamentId);
                 return Page();
             }
             catch (Exception ex)
@@ -46,6 +50,9 @@ namespace DuelSysWeb.Pages.Tournaments
                 {
                     _notyf.Success("Successfully registered for tournament");
                 }
+                else {
+                    _notyf.Error("Maximum amount of registered players has been reached");
+                }
                 return RedirectToPage("/Tournaments/TournamentDetails", new { tournamentId = tournamentId });
             }
             catch (Exception ex)
@@ -54,9 +61,23 @@ namespace DuelSysWeb.Pages.Tournaments
                 return RedirectToPage("/Tournaments/TournamentDetails", new { tournamentId = tournamentId });
             }
         }
-        public void OnPostOnDeregister()
+        public IActionResult OnPostOnDeregister()
         {
+            try
+            {
+                bool result = _tournamentService.DeregisterPlayerForTournament(tournamentId, HttpContext.Session.GetLoggedUser().Id);
+                if (result)
+                {
+                    _notyf.Success("Successfully deregistered from tournament");
+                }
 
+                return RedirectToPage("/Tournaments/TournamentDetails", new { tournamentId = tournamentId });
+            }
+            catch (Exception ex)
+            {
+                _notyf.Error(ex.Message);
+                return RedirectToPage("/Tournaments/TournamentDetails", new { tournamentId = tournamentId });
+            }
         }
     }
 }
