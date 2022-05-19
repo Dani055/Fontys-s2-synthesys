@@ -31,8 +31,6 @@ namespace BusinessLayer.services
         }
         public bool Register(User user, User loggedUser)
         {
-            string hashedPass = Utils.Hash(user.Password);
-            user.Password = hashedPass;
             if (user is Staff)
             {
                 if (loggedUser == null || !loggedUser.Role.CanAccessDesktopApp())
@@ -40,11 +38,15 @@ namespace BusinessLayer.services
                     throw new Exception("You are not authorized!");
                 }
                 _userValidator.ValidateStaff((Staff)user);
+                string hashedPass = Utils.Hash(user.Password);
+                user.Password = hashedPass;
                 return _dalUser.RegisterStaff((Staff)user);
             }
             else if (user is Player)
             {
                 _userValidator.ValidatePlayer((Player)user);
+                string hashedPass = Utils.Hash(user.Password);
+                user.Password = hashedPass;
                 return _dalUser.RegisterPlayer((Player)user);
             }
             else

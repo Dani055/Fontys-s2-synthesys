@@ -118,6 +118,10 @@ namespace BusinessLayer.services
         {
             return _dalTournament.GetTournamentStandings(tourneyId);
         }
+        public List<TourneyStanding> GetTournamentParticipation(int playerId)
+        {
+            return _dalTournament.GetStandingsForPlayer(playerId);
+        }
         public bool ConcludeTournamentAndRankPlayers(int tourneyId, User loggedUser)
         {
             if (!loggedUser.Role.CanAccessTournamentCUD())

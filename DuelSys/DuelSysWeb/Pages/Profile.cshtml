@@ -1,4 +1,5 @@
 ﻿@page
+@using BusinessLayer.models;
 @model DuelSysWeb.Pages.ProfileModel
 @{
 }
@@ -12,58 +13,55 @@
                             <img src="~/images/pfp.png" alt="">
                         </div>
                     </div>
-                    <div class="row"><h3>Hans Olivera</h3></div>
-                    <div class="row"><h3>* You are a staff member *</h3></div>
+                    <div class="row"><h3>@Model.user.Firstname @Model.user.Lastname</h3></div>
+                    @if (Model.user is Staff)
+                    {
+                        <div class="row"><h3>* You are a staff member *</h3></div>
+                    }                
                     <div class="row33">
                         <h3>Info:</h3>
-                        <p>Email: HansO@gmail.com</p>
-                        <p>Address: somewhere in eindhoven</p>
-                        <p><span class="green">Won games</span>: 3</p>
-                        <p><span class="red">Lost games</span>: 1</p>
+                        <p>Email: @Model.user.Email</p>
+                        <p>Address: @Model.user.Address</p>
+                        @if (Model.user is Staff)
+                        {
+                            <p>Salary: @(((Staff)Model.user).Salary.ToString())</p>
+                        }
+                        else{
+                            <p><span class="green">Won games</span>: @(((Player)Model.user).Wongames.ToString())</p>
+                            <p><span class="red">Lost games</span>: @(((Player)Model.user).Lostgames.ToString())</p>
+                        }
+                        
                     </div>
                     <div class="row33">
                         <h3>Tournament participation</h3>
-                        <div class="game">
+                        @foreach (TourneyStanding ts in Model.standings)
+                        {
+                         <div class="game">
                             <div class="game-players">
-                                <a href="#">Eindhoven annual badminton tournament</a>
-                                <p>1st place</p>
+                                <a asp-page="/Tournaments/TournamentDetails" asp-route-tournamentId="@ts.TournamentId">@ts.TournamentName</a>
+                                <p>Place: @ts.Place.ToString()</p>
                             </div>
                         </div>
-                        <div class="game">
-                            <div class="game-players">
-                                <a href="#">Amsterdam playoffs</a>
-                                <p>2nd place</p>
-                            </div>
-                        </div>
+                        }
                     </div>
                     <div class="row33">
                         <h3>Games played</h3>
-                        <div class="game">
+                        @foreach (TourneyMatch m in Model.matches)
+                        {
+                         <div class="game">
                             <div class="game-players">
-                                <h3>Hans Olivera</h3>
+                                <h3>@m.Player1Firstname @m.Player1Lastname</h3>
                                 <p>VS</p>
-                                <h3>Samiye Iset</h3>
+                                <h3>@m.Player2Firstname @m.Player2Lastname</h3>
                             </div>
                             <div class="game-date">
-                                <p><span class="blue">3.5.2022</span></p>
+                                <p><span class="blue">@m.DateHeld.ToString()</span></p>
                             </div>
                             <div class="game-results">
-                                <p>21 - 23</p>
+                                <p>@m.Player1Points - @m.Player2Points</p>
                             </div>
                         </div>
-                        <div class="game">
-                            <div class="game-players">
-                                <h3>Hans Olivera</h3>
-                                <p>VS</p>
-                                <h3>Kriemhilde Raju</h3>
-                            </div>
-                            <div class="game-date">
-                                <p><span class="blue">5.5.2022</span></p>
-                            </div>
-                            <div class="game-results">
-                                <p>21 - 7</p>
-                            </div>
-                        </div>
+                        }
                     </div>
                 </div>
             </div>

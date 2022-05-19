@@ -61,7 +61,10 @@ namespace BusinessLayer.services
         {
             return _dalMatch.GetMatches(tourneyId);
         }
-
+        public List<TourneyMatch> GetMyMatches(int playerId)
+        {
+            return _dalMatch.GetPlayerMatches(playerId);
+        }
         public bool EnterMatchResult(TourneyMatch match, User loggedUser)
         {
             if (!loggedUser.Role.CanAccessMatchCUD())

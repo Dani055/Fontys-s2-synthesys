@@ -36,6 +36,7 @@ namespace BusinessLayer.models
             if (role == "Staff")
             {
                 Role = new StaffRole(role);
+                /*Role = Activator.CreateInstance(Type.GetType("BusinessLayer.roles." + role + "Role"), new object[] { role }) as IRole;*/
             }
             else if (role == "Player")
             {

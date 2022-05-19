@@ -374,7 +374,7 @@ namespace DAL.layers
                 string sql = "SELECT ts.Id, ts.tournament_id, ts.player_id, ts.wins, ts.losses, ts.status, ts.place, u.first_name, u.last_name " +
                     "FROM s2synt_tourney_standings as ts " +
                     "inner join s2synt_user as u " +
-                    "on ts.player_id = u.id WHERE tournament_id = @tournament_id";
+                    "on ts.player_id = u.id WHERE tournament_id = @tournament_id ORDER BY place, wins; ";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 cmd.Parameters.AddWithValue("@tournament_id", tourneyId);
@@ -408,7 +408,50 @@ namespace DAL.layers
                 conn.Close();
             }
         }
+        public List<TourneyStanding> GetStandingsForPlayer(int playerId)
+        {
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
+            try
+            {
+                string sql = "SELECT ts.Id, t.name, ts.tournament_id,ts.player_id, ts.wins, ts.losses, ts.status, ts.place, u.first_name, u.last_name " +
+                    "FROM s2synt_tourney_standings as ts " +
+                    "inner join s2synt_user as u on ts.player_id = u.id  " +
+                    "inner join s2synt_tournament as t on ts.tournament_id = t.id " +
+                    "WHERE player_id = @player_id ORDER BY id DESC LIMIT 10";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
 
+                cmd.Parameters.AddWithValue("@player_id", playerId);
+                conn.Open();
+
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                List<TourneyStanding> list = new List<TourneyStanding>();
+                while (reader.Read())
+                {
+
+                    int Id = reader.GetInt32("Id");
+                    int tournamentId = reader.GetInt32("tournament_id");
+                    string tournamentName = reader.GetString("name");
+                    int playerid = reader.GetInt32("player_id");
+                    int wins = reader.GetInt32("wins");
+                    int losses = reader.GetInt32("losses");
+                    string status = reader.GetString("status");
+                    int place = string.IsNullOrEmpty(reader["place"].ToString()) ? 0 : int.Parse(reader["place"].ToString());
+                    string playerfirstname = reader.GetString("first_name");
+                    string playerlastname = reader.GetString("last_name");
+
+                    TourneyStanding ts = new TourneyStanding(Id, tournamentId, playerid, playerfirstname, playerlastname, wins, losses, status, place) { TournamentName = tournamentName};
+                    list.Add(ts);
+
+                }
+                reader.Close();
+                return list;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
         public bool EditStandings(List<TourneyStanding> standings)
         {
             MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());

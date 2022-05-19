@@ -11,7 +11,7 @@ namespace BusinessLayer.interfaces
     {
         public bool AddMatches(List<TourneyMatch> matches);
         public List<TourneyMatch> GetMatches(int tourneyId);
-
+        public List<TourneyMatch> GetPlayerMatches(int playerId);
         public bool EnterMatchScore(Tournament tourney, TourneyMatch match);
     }
 }

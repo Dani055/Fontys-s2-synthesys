@@ -65,7 +65,7 @@ namespace BusinessLayer.validators
             {
                 throw new Exception("You must select a role!");
             }
-            else if (!Regex.IsMatch(player.Email, @"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"))
+            else if (String.IsNullOrEmpty(player.Email) || !Regex.IsMatch(player.Email, @"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"))
             {
                 throw new Exception("Email must be valid!");
             }

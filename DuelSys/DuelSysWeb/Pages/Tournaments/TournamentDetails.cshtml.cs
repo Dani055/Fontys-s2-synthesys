@@ -10,17 +10,20 @@ namespace DuelSysWeb.Pages.Tournaments
     {
         private readonly INotyfService _notyf;
         private readonly TournamentService _tournamentService;
+        private readonly MatchService _matchService;
 
         [BindProperty]
         public Tournament tourney { get; set; }
         public List<TourneyStanding> standings { get; set; }
+        public List<TourneyMatch> matches { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public int tournamentId { get; set; }
-        public TournamentDetailsModel(INotyfService notyf, TournamentService ts)
+        public TournamentDetailsModel(INotyfService notyf, TournamentService ts, MatchService ms)
         {
             _notyf = notyf;
             _tournamentService = ts;
+            _matchService = ms;
         }
         public IActionResult OnGet()
         {
@@ -33,6 +36,18 @@ namespace DuelSysWeb.Pages.Tournaments
                     return RedirectToPage("/Tournaments/ViewTournaments");
                 }
                 standings = _tournamentService.GetTournamentStandings(tournamentId);
+                matches = _matchService.GetMatches(tournamentId);
+                foreach (TourneyMatch m in matches)
+                {
+                    if (m.Player1id == 0)
+                    {
+                        m.Player1Firstname = "(Unknown)";
+                    }
+                    if (m.Player2id == 0)
+                    {
+                        m.Player2Firstname = "(Unknown)";
+                    }
+                }
                 return Page();
             }
             catch (Exception ex)

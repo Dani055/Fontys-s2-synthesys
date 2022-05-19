@@ -4,33 +4,33 @@
 }
 
  <div class="wrapper">
-     <form action="index.html" class="with-legend">
+     <form method="post" class="with-legend">
          <fieldset>
              <legend>Register</legend> 
              <div class="form-content">
                  <div class="field">
-                     <input type="text" name="username" id="username">
-                     <label for="username">Username</label>
+                     <input type="text" asp-for="user.Username">
+                     <label asp-for="user.Username">Username</label>
                  </div>
                  <div class="field">
-                     <input type="password" name="password" id="password">
-                     <label for="password">Password</label>
+                     <input type="password" asp-for="user.Password">
+                     <label asp-for="user.Username">Password</label>
                  </div>
                  <div class="field">
-                     <input type="email" name="email" id="email">
-                     <label for="email">Email</label>
+                     <input type="email" asp-for="user.Email">
+                     <label asp-for="user.Email">Email</label>
                  </div>
                  <div class="field">
-                     <input type="text" name="address" id="address">
-                     <label for="address">Address</label>
+                     <input type="text" asp-for="user.Address">
+                     <label asp-for="user.Address">Address</label>
                  </div>
                  <div class="field">
-                     <input type="text" name="firstname" id="firstname">
-                     <label for="firstname">First name</label>
+                     <input type="text" asp-for="user.Firstname">
+                     <label asp-for="user.Firstname">First name</label>
                  </div>
                  <div class="field">
-                     <input type="text" name="lastname" id="lastname">
-                     <label for="lastname">Last name</label>
+                     <input type="text" asp-for="user.Lastname">
+                     <label asp-for="user.Lastname">Last name</label>
                  </div>
                  <div class="field-submit">
                      <button type="submit">Register</button>

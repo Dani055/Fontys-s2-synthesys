@@ -107,7 +107,61 @@ namespace DAL.layers
                 conn.Close();
             }
         }
+        public List<TourneyMatch> GetPlayerMatches(int playerId)
+        {
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
+            try
+            {
+                string sql = "SELECT m.id, m.tournament_id, m.date, m.player1_id, " +
+                    "p1.first_name as p1Firstname, p1.last_name as p1Lastname, m.player1_points, " +
+                    "m.player2_id, p2.first_name as p2Firstname, p2.last_name as p2Lastname, m.player2_points, m.winner_id " +
+                    "FROM s2synt_tourney_match as m " +
+                    "left join s2synt_user as p1 " +
+                    "on m.player1_id = p1.id " +
+                    "left join s2synt_user as p2 " +
+                    "on m.player2_id = p2.id " +
+                    "WHERE m.player1_id = @id OR m.player2_id = @id " +
+                    "order by date DESC LIMIT 10;";
 
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@id", playerId);
+                conn.Open();
+
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                List<TourneyMatch> list = new List<TourneyMatch>();
+                while (reader.Read())
+                {
+
+                    int Id = reader.GetInt32("Id");
+                    int tournamentId = reader.GetInt32("tournament_id");
+                    DateTime date = reader.GetDateTime("date");
+
+                    int player1Id = string.IsNullOrEmpty(reader["player1_id"].ToString()) ? 0 : int.Parse(reader["player1_id"].ToString());
+                    string player1firstname = reader["p1Firstname"].ToString();
+                    string player1lastname = reader["p1Lastname"].ToString();
+                    int player1points = string.IsNullOrEmpty(reader["player1_points"].ToString()) ? 0 : int.Parse(reader["player1_points"].ToString());
+
+                    int player2Id = string.IsNullOrEmpty(reader["player2_id"].ToString()) ? 0 : int.Parse(reader["player2_id"].ToString());
+                    string player2firstname = reader["p2Firstname"].ToString();
+                    string player2lastname = reader["p2Lastname"].ToString();
+                    int player2points = string.IsNullOrEmpty(reader["player2_points"].ToString()) ? 0 : int.Parse(reader["player2_points"].ToString());
+                    int winnerId = string.IsNullOrEmpty(reader["winner_id"].ToString()) ? 0 : int.Parse(reader["winner_id"].ToString()); ;
+
+                    TourneyMatch tm = new TourneyMatch(Id, tournamentId, date, player1Id, player1firstname, player1lastname, player1points, player2Id, player2firstname, player2lastname, player2points, winnerId);
+
+                    list.Add(tm);
+
+                }
+                reader.Close();
+                return list;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
         public bool EnterMatchScore(Tournament tourney, TourneyMatch match)
         {
             MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
