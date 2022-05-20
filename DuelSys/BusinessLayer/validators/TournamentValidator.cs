@@ -53,7 +53,15 @@ namespace BusinessLayer.validators
                 throw new Exception($"The selected time span for the tournament is too short to host all required games. Max. games per day: 6 | Required: {gamesPerDay} Consider extending the tournament deadline.");
             }
             return true;
-            
+
+        }
+        public bool CheckIfTournamentBeginsInOneWeek(Tournament tourney)
+        {
+            if (Utils.GetSystemDate >= tourney.StartDate.AddDays(-7))
+            {
+                return true;
+            }
+            return false;
         }
         private int CalculateTourneyGamesPerDay(Tournament tourney)
         {

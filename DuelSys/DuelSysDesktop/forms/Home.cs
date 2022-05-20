@@ -1,15 +1,7 @@
 ﻿using BusinessLayer.services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
 using BusinessLayer.models;
+using BusinessLayer.validators;
 
 namespace DuelSysDesktop.forms
 {
@@ -17,13 +9,17 @@ namespace DuelSysDesktop.forms
     {
         bool closedByButton = false;
         private readonly TournamentService _tournamentService;
-
+        private readonly TournamentValidator _tournamentValidator;
+        private readonly MatchService _matchService;
         private List<Tournament> tourneys = new List<Tournament>();
 
         public Home()
         {
             InitializeComponent();
             _tournamentService = Program.ServiceProvider.GetService<TournamentService>();
+            _tournamentValidator = Program.ServiceProvider.GetService<TournamentValidator>();
+            _matchService = Program.ServiceProvider.GetService<MatchService>();
+
             cbxTourneyStatus.SelectedIndex = 0;
             lblTime.Text = DateTime.Now.ToString("HH:mm:ss");
             tmr.Start();
@@ -91,7 +87,7 @@ namespace DuelSysDesktop.forms
         private void btnEditTourney_Click(object sender, EventArgs e)
         {
             Tournament tourney = lvTournaments.SelectedItems[0].Tag as Tournament;
-            if (_tournamentService.CheckIfTournamentBeginsInOneWeek(tourney))
+            if (_tournamentValidator.CheckIfTournamentBeginsInOneWeek(tourney))
             {
                 DesktopUtils.ShowError("Tournament begins in less than one week and cannot be edited!");
                 return;
@@ -124,15 +120,41 @@ namespace DuelSysDesktop.forms
                     {
                         DesktopUtils.ShowInfo("Tournament deleted");
                     }
-                    LoadTournaments(cbxTourneyStatus.SelectedIndex.ToString());
+                    LoadTournaments(cbxTourneyStatus.SelectedItem.ToString());
+                }
+            }
+
+            catch (ArgumentOutOfRangeException)
+            {
+                DesktopUtils.ShowError("Select tournament to delete!");
+            }
+            catch (Exception ex)
+            {
+                DesktopUtils.ShowError(ex.Message);
+            }
+        }
+
+        private void btnStartTournament_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int tourneyId = Convert.ToInt16(lvTournaments.SelectedItems[0].Text);
+                bool result = _matchService.ScheduleTournament(tourneyId, DesktopUtils.loggedUser);
+                if (result)
+                {
+                    DesktopUtils.ShowInfo("Tournament scheduled");
+                    LoadTournaments(cbxTourneyStatus.SelectedItem.ToString());
                 }
             }
             catch (ArgumentOutOfRangeException)
             {
                 DesktopUtils.ShowError("Select tournament to delete!");
-                return;
             }
-            
+            catch (Exception ex)
+            {
+                DesktopUtils.ShowError(ex.Message);
+                LoadTournaments(cbxTourneyStatus.SelectedItem.ToString());
+            }
         }
     }
 }

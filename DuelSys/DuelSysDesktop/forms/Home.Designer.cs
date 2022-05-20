@@ -59,7 +59,7 @@
             // 
             // btnLogout
             // 
-            this.btnLogout.Location = new System.Drawing.Point(1252, 12);
+            this.btnLogout.Location = new System.Drawing.Point(1295, 12);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(101, 40);
             this.btnLogout.TabIndex = 6;
@@ -86,7 +86,7 @@
             this.lvTournaments.Location = new System.Drawing.Point(12, 12);
             this.lvTournaments.MultiSelect = false;
             this.lvTournaments.Name = "lvTournaments";
-            this.lvTournaments.Size = new System.Drawing.Size(1167, 411);
+            this.lvTournaments.Size = new System.Drawing.Size(1210, 411);
             this.lvTournaments.TabIndex = 7;
             this.lvTournaments.UseCompatibleStateImageBehavior = false;
             this.lvTournaments.View = System.Windows.Forms.View.Details;
@@ -123,8 +123,8 @@
             // 
             // colHasStarted
             // 
-            this.colHasStarted.Text = "Status";
-            this.colHasStarted.Width = 80;
+            this.colHasStarted.Text = "Scheduled";
+            this.colHasStarted.Width = 120;
             // 
             // colMinPlayers
             // 
@@ -162,7 +162,7 @@
             // 
             // btnRegisterStaff
             // 
-            this.btnRegisterStaff.Location = new System.Drawing.Point(1185, 71);
+            this.btnRegisterStaff.Location = new System.Drawing.Point(1228, 71);
             this.btnRegisterStaff.Name = "btnRegisterStaff";
             this.btnRegisterStaff.Size = new System.Drawing.Size(168, 53);
             this.btnRegisterStaff.TabIndex = 9;
@@ -226,7 +226,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTime.AutoSize = true;
             this.lblTime.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTime.Location = new System.Drawing.Point(1185, 320);
+            this.lblTime.Location = new System.Drawing.Point(1228, 320);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(168, 50);
             this.lblTime.TabIndex = 16;
@@ -239,16 +239,17 @@
             // 
             // btnStartTournament
             // 
-            this.btnStartTournament.Location = new System.Drawing.Point(1185, 154);
+            this.btnStartTournament.Location = new System.Drawing.Point(1228, 154);
             this.btnStartTournament.Name = "btnStartTournament";
             this.btnStartTournament.Size = new System.Drawing.Size(168, 58);
             this.btnStartTournament.TabIndex = 25;
             this.btnStartTournament.Text = "Generate tournament schedule";
             this.btnStartTournament.UseVisualStyleBackColor = true;
+            this.btnStartTournament.Click += new System.EventHandler(this.btnStartTournament_Click);
             // 
             // btnEndTournament
             // 
-            this.btnEndTournament.Location = new System.Drawing.Point(1185, 238);
+            this.btnEndTournament.Location = new System.Drawing.Point(1228, 238);
             this.btnEndTournament.Name = "btnEndTournament";
             this.btnEndTournament.Size = new System.Drawing.Size(168, 57);
             this.btnEndTournament.TabIndex = 27;
@@ -259,7 +260,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1365, 590);
+            this.ClientSize = new System.Drawing.Size(1408, 590);
             this.Controls.Add(this.btnEndTournament);
             this.Controls.Add(this.btnStartTournament);
             this.Controls.Add(this.lblTime);

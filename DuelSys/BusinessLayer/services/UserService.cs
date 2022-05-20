@@ -32,6 +32,7 @@ namespace BusinessLayer.services
         public bool Register(User user, User loggedUser)
         {
             string hashedPass = Utils.Hash(user.Password);
+            user.Password = hashedPass;
             if (user is Staff)
             {
                 if (loggedUser == null || !loggedUser.Role.CanAccessDesktopApp())

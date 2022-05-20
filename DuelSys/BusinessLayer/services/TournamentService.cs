@@ -13,6 +13,7 @@ namespace BusinessLayer.services
     {
         private readonly IDALTournament _dalTournament;
         private readonly TournamentValidator _tournamentValidator;
+
         public TournamentService(IDALTournament dalTournament, TournamentValidator tournamentValidator)
         {
             _dalTournament = dalTournament;
@@ -37,7 +38,7 @@ namespace BusinessLayer.services
             {
                 throw new Exception("You are not authorized to edit a tournament!");
             }
-            else if (CheckIfTournamentBeginsInOneWeek(tourney))
+            else if (_tournamentValidator.CheckIfTournamentBeginsInOneWeek(tourney))
             {
                 throw new Exception("Tournament cannot be edited because it begins in less than one week");
             }
@@ -54,14 +55,7 @@ namespace BusinessLayer.services
             }
             return _dalTournament.DeleteTournament(id);
         }
-        public bool CheckIfTournamentBeginsInOneWeek(Tournament tourney)
-        {
-            if (Utils.GetSystemDate >= tourney.StartDate.AddDays(-7))
-            {
-                return true;
-            }
-            return false;
-        }
+
         public Tournament GetTournamentById(int id)
         {
             return _dalTournament.GetTournamentById(id);
@@ -87,7 +81,7 @@ namespace BusinessLayer.services
             Tournament tourney = _dalTournament.GetTournamentById(tournamentId);
 
             TourneyStanding ts = _dalTournament.GetTournamentStanding(tourney.Id, playerId);
-            if (CheckIfTournamentBeginsInOneWeek(tourney))
+            if (_tournamentValidator.CheckIfTournamentBeginsInOneWeek(tourney))
             {
                 throw new Exception("Register unsuccessful. Tournament starts in less than 1 week.");
             }
@@ -111,7 +105,7 @@ namespace BusinessLayer.services
             {
                 throw new Exception("You are not registered for this tournament!");
             }
-            else if (CheckIfTournamentBeginsInOneWeek(tourney))
+            else if (_tournamentValidator.CheckIfTournamentBeginsInOneWeek(tourney))
             {
                 throw new Exception("Deregister unsuccessful. Tournament starts in less than 1 week.");
             }

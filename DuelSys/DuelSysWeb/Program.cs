@@ -20,11 +20,14 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddSingleton<IDALTournament, DALTournament>();
 builder.Services.AddSingleton<IDALUser, DALUser>();
+builder.Services.AddSingleton<IDALMatch, DALMatch>();
 
+builder.Services.AddSingleton<TournamentScheduler>();
 builder.Services.AddSingleton<TournamentValidator>();
 builder.Services.AddSingleton<UserValidator>();
 
 builder.Services.AddScoped<TournamentService>();
+builder.Services.AddScoped<MatchService>();
 builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();
