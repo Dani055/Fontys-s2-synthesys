@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
+using BusinessLayer.interfaces;
+using BusinessLayer.tournament_systems;
 
 namespace DuelSysDesktop.forms
 {
@@ -47,9 +49,10 @@ namespace DuelSysDesktop.forms
                 MinPlayers = minPlayers,
                 MaxPlayers = maxPlayers,
                 Location = location,
-                SystemName = system,
                 HasStarted = false
             };
+            tourney.System = new Round_robin_system(tourney, system);
+
             try
             {
                 bool result = _tournamentService.CreateTournament(tourney, DesktopUtils.loggedUser);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLayer.interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace BusinessLayer.models
         public int MinPlayers { get; set; }
         public int MaxPlayers { get; set; }
         public string Location  { get; set; }
-        public string SystemName { get; set; }
+        public ITournamentSystem System { get; set; }
         public bool HasStarted { get; set; }
 
         public Tournament()
@@ -35,7 +36,7 @@ namespace BusinessLayer.models
             MinPlayers = minplayers;
             MaxPlayers = maxplayers;
             Location = location;
-            SystemName = systemname;
+            System = Activator.CreateInstance(Type.GetType("BusinessLayer.tournament_systems." + systemname.Replace("-", "_") + "_system"), new object[] { this, systemname }) as ITournamentSystem;
             HasStarted = hasstarted;
         }
     }

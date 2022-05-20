@@ -9,15 +9,13 @@ namespace BusinessLayer.services
         private readonly IDALTournament _dalTournament;
         private readonly IDALMatch _dalMatch;
         private readonly TournamentValidator _tournamentValidator;
-        private readonly TournamentScheduler _tournamentScheduler;
         private readonly MatchValidator _matchValidator;
 
-        public MatchService(IDALTournament dalTournament,IDALMatch dalMatch, TournamentValidator tournamentValidator, TournamentScheduler tournamentScheduler, MatchValidator matchValidator)
+        public MatchService(IDALTournament dalTournament,IDALMatch dalMatch, TournamentValidator tournamentValidator, MatchValidator matchValidator)
         {
             _dalTournament = dalTournament;
             _dalMatch = dalMatch;
             _tournamentValidator = tournamentValidator;
-            _tournamentScheduler = tournamentScheduler;
             _matchValidator = matchValidator;
         }
         public bool ScheduleTournament(int tournamentId, User loggedUser)
@@ -46,13 +44,13 @@ namespace BusinessLayer.services
             }
             else
             {
-                if (tourney.SystemName == "Single-elimination" && registered.Count % 4 != 0)
+                if (tourney.System.SystemName == "Single-elimination" && registered.Count % 4 != 0)
                 {
                     throw new Exception("This is an elimination tournament and the registered players are not dividable by 4. Tournament will NOT be scheduled.");
                 }
             }
 
-            List<TourneyMatch> matches = _tournamentScheduler.GenerateTournamentMatches(tourney, registered);
+            List<TourneyMatch> matches = tourney.System.GenerateTournamentMatches(registered);
 
             return _dalMatch.AddMatches(matches);
         }

@@ -20,14 +20,7 @@
                 @if (Context.Session.GetLoggedUser() != null)
                 {
                     <p class="welcome">
-                   @if (Context.Session.GetLoggedUser() is Staff)
-                     {
-                        @:Staff yes
-                     }
-                    else
-                    {
-                        @:Player yes
-                    }
+                        @Context.Session.GetLoggedUser().Firstname
                     </p>
                 }
                 

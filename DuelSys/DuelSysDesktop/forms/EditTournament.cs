@@ -1,6 +1,8 @@
 ﻿using BusinessLayer.services;
 using Microsoft.Extensions.DependencyInjection;
 using BusinessLayer.models;
+using BusinessLayer.interfaces;
+using BusinessLayer.tournament_systems;
 
 namespace DuelSysDesktop.forms
 {
@@ -28,7 +30,7 @@ namespace DuelSysDesktop.forms
             tbMinPlayers.Value = tourney.MinPlayers;
             tbMaxPlayers.Value = tourney.MaxPlayers;
             tbLocation.Text = tourney.Location;
-            cbSystem.Text = tourney.SystemName;
+            cbSystem.Text = tourney.System.SystemName;
         }
 
         private void btnEditTourney_Click(object sender, EventArgs e)
@@ -55,10 +57,9 @@ namespace DuelSysDesktop.forms
                 MinPlayers = minPlayers,
                 MaxPlayers = maxPlayers,
                 Location = location,
-                SystemName = system,
                 HasStarted = false
             };
-
+            tourney.System = new Round_robin_system(tourney, system);
             try
             {
                 bool result = _tournamentService.EditTournament(tourney, DesktopUtils.loggedUser);

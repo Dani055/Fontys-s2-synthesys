@@ -61,7 +61,7 @@ namespace DuelSysDesktop.forms
             lvTournaments.Items.Clear();
             foreach (Tournament tourney in tourneys)
             {
-                string[] row = { tourney.Id.ToString(),tourney.Name, tourney.SportName, tourney.Description, tourney.StartDate.ToShortDateString(), tourney.EndDate.ToShortDateString(), tourney.HasStarted.ToString(), tourney.MinPlayers.ToString(), tourney.MaxPlayers.ToString(), tourney.Location, tourney.SystemName };
+                string[] row = { tourney.Id.ToString(),tourney.Name, tourney.SportName, tourney.Description, tourney.StartDate.ToShortDateString(), tourney.EndDate.ToShortDateString(), tourney.HasStarted.ToString(), tourney.MinPlayers.ToString(), tourney.MaxPlayers.ToString(), tourney.Location, tourney.System.SystemName };
 
                 ListViewItem lv = new ListViewItem(row);
                 lv.Tag = tourney;

@@ -18,7 +18,6 @@ namespace DuelSysDesktop
                 services.AddSingleton<IDALTournament, DALTournament>();
                 services.AddSingleton<IDALMatch, DALMatch>();
 
-                services.AddSingleton<TournamentScheduler>();
                 services.AddSingleton<UserValidator>();
                 services.AddSingleton<TournamentValidator>();
                 services.AddSingleton<MatchValidator>();

@@ -33,15 +33,16 @@ namespace BusinessLayer.models
             Address = address;
             Firstname = firstname;
             Lastname = lastname;
-            if (role == "Staff")
+            Role = Activator.CreateInstance(Type.GetType("BusinessLayer.roles." + role + "Role"), new object[] { role }) as IRole;
+/*            if (role == "Staff")
             {
                 Role = new StaffRole(role);
-                /*Role = Activator.CreateInstance(Type.GetType("BusinessLayer.roles." + role + "Role"), new object[] { role }) as IRole;*/
+                
             }
             else if (role == "Player")
             {
                 Role = new PlayerRole(role);
-            }
+            }*/
         }
 
     }

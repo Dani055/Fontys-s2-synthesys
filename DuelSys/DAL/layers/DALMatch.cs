@@ -182,7 +182,7 @@ namespace DAL.layers
                 "UPDATE s2synt_user SET won_games = won_games + 1 WHERE id = @winner_id;" +
                 "UPDATE s2synt_user SET lost_games = lost_games + 1 WHERE id = @loser_id;";
 
-            if (tourney.SystemName == "Single-elimination")
+            if (tourney.System.SystemName == "Single-elimination")
             {
                 sql += "update s2synt_tourney_match set player1_id  = if(player1_id is null, @winner_id, player1_id), player2_id = if(player2_id is null and player1_id != @winner_id, @winner_id, player2_id) where id in" +
                     "(SELECT id FROM (SELECT id FROM s2synt_tourney_match where (player1_id is NULL or player2_id is NULL) and tournament_id = @tournament_id ORDER BY date LIMIT 1) as t);";

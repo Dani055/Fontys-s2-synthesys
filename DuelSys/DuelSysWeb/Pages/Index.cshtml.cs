@@ -17,7 +17,7 @@ namespace DuelSysWeb.Pages
 
         public void OnGet()
         {
-            _notyf.Success("xd");
+            
         }
     }
 }

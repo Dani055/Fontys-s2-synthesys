@@ -36,11 +36,11 @@ namespace BusinessLayer.validators
             {
                 throw new Exception("You must enter a tournament location!");
             }
-            else if (String.IsNullOrEmpty(tourney.SystemName))
+            else if (String.IsNullOrEmpty(tourney.System.SystemName))
             {
                 throw new Exception("You must select a system for the tournament!");
             }
-            else if (tourney.SystemName == "Single-elimination")
+            else if (tourney.System.SystemName == "Single-elimination")
             {
                 if (tourney.MinPlayers % 4 != 0 || tourney.MaxPlayers % 4 != 0)
                 {
@@ -69,7 +69,7 @@ namespace BusinessLayer.validators
             int daysForTournament = (tourney.EndDate.Date - tourney.StartDate.Date).Days + 1;
             int gamesToBePlayed = 0;
 
-            if (tourney.SystemName == "Round-robin")
+            if (tourney.System.SystemName == "Round-robin")
             {
                 for (int i = 1; i < maxplayers; i++)
                 {
@@ -77,7 +77,7 @@ namespace BusinessLayer.validators
                 }
                 
             }
-            else if (tourney.SystemName == "Single-elimination")
+            else if (tourney.System.SystemName == "Single-elimination")
             {
                 gamesToBePlayed = maxplayers - 1;
             }

@@ -34,7 +34,7 @@ namespace DAL.layers
                 cmd.Parameters.AddWithValue("@min_players", tourney.MinPlayers);
                 cmd.Parameters.AddWithValue("@max_players", tourney.MaxPlayers);
                 cmd.Parameters.AddWithValue("@location", tourney.Location);
-                cmd.Parameters.AddWithValue("@system_id", Array.IndexOf(DBEnums.TournamentSystems, tourney.SystemName));
+                cmd.Parameters.AddWithValue("@system_id", Array.IndexOf(DBEnums.TournamentSystems, tourney.System.SystemName));
                 cmd.Parameters.AddWithValue("@hasStarted", false);
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
@@ -62,7 +62,7 @@ namespace DAL.layers
                 cmd.Parameters.AddWithValue("@min_players", tourney.MinPlayers);
                 cmd.Parameters.AddWithValue("@max_players", tourney.MaxPlayers);
                 cmd.Parameters.AddWithValue("@location", tourney.Location);
-                cmd.Parameters.AddWithValue("@system_id", Array.IndexOf(DBEnums.TournamentSystems, tourney.SystemName));
+                cmd.Parameters.AddWithValue("@system_id", Array.IndexOf(DBEnums.TournamentSystems, tourney.System.SystemName));
                 cmd.Parameters.AddWithValue("@hasStarted", tourney.HasStarted);
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
