@@ -32,8 +32,8 @@ namespace DAL.layers
                 {
                     cmd.Parameters.Clear();
 
-                    cmd.Parameters.AddWithValue("@player1_id", m.Player1id == 0 ? null : m.Player1id);
-                    cmd.Parameters.AddWithValue("@player2_id", m.Player2id == 0 ? null : m.Player2id);
+                    cmd.Parameters.AddWithValue("@player1_id", m.Player1.Id == 0 ? null : m.Player1.Id);
+                    cmd.Parameters.AddWithValue("@player2_id", m.Player2.Id == 0 ? null : m.Player2.Id);
                     cmd.Parameters.AddWithValue("@date", m.DateHeld.ToString(dBSettings.DateTimeFormat));
                     cmd.Parameters.AddWithValue("@tournament_id", m.TournamentId);
                     cmd.ExecuteNonQuery();
@@ -86,15 +86,28 @@ namespace DAL.layers
                     int player1Id = string.IsNullOrEmpty(reader["player1_id"].ToString()) ? 0 : int.Parse(reader["player1_id"].ToString());
                     string player1firstname = reader["p1Firstname"].ToString();
                     string player1lastname = reader["p1Lastname"].ToString();
+                    Player player1 = new Player()
+                    {
+                        Id = player1Id,
+                        Firstname = player1firstname,
+                        Lastname = player1lastname,
+                    };
                     int player1points = string.IsNullOrEmpty(reader["player1_points"].ToString()) ? 0 : int.Parse(reader["player1_points"].ToString());
 
                     int player2Id = string.IsNullOrEmpty(reader["player2_id"].ToString()) ? 0 : int.Parse(reader["player2_id"].ToString());
                     string player2firstname = reader["p2Firstname"].ToString();
                     string player2lastname = reader["p2Lastname"].ToString();
+                    Player player2 = new Player()
+                    {
+                        Id = player2Id,
+                        Firstname = player2firstname,
+                        Lastname = player2lastname,
+                    };
                     int player2points = string.IsNullOrEmpty(reader["player2_points"].ToString()) ? 0 : int.Parse(reader["player2_points"].ToString());
+
                     int winnerId = string.IsNullOrEmpty(reader["winner_id"].ToString()) ? 0 : int.Parse(reader["winner_id"].ToString()); ;
 
-                    TourneyMatch tm = new TourneyMatch(Id, tournamentId, date, player1Id, player1firstname, player1lastname, player1points, player2Id, player2firstname, player2lastname, player2points, winnerId);
+                    TourneyMatch tm = new TourneyMatch(Id, tournamentId, date, player1, player1points, player2, player2points, winnerId);
 
                     list.Add(tm);
 
@@ -141,15 +154,27 @@ namespace DAL.layers
                     int player1Id = string.IsNullOrEmpty(reader["player1_id"].ToString()) ? 0 : int.Parse(reader["player1_id"].ToString());
                     string player1firstname = reader["p1Firstname"].ToString();
                     string player1lastname = reader["p1Lastname"].ToString();
+                    Player player1 = new Player()
+                    {
+                        Id = player1Id,
+                        Firstname = player1firstname,
+                        Lastname = player1lastname,
+                    };
                     int player1points = string.IsNullOrEmpty(reader["player1_points"].ToString()) ? 0 : int.Parse(reader["player1_points"].ToString());
 
                     int player2Id = string.IsNullOrEmpty(reader["player2_id"].ToString()) ? 0 : int.Parse(reader["player2_id"].ToString());
                     string player2firstname = reader["p2Firstname"].ToString();
                     string player2lastname = reader["p2Lastname"].ToString();
+                    Player player2 = new Player()
+                    {
+                        Id = player2Id,
+                        Firstname = player2firstname,
+                        Lastname = player2lastname,
+                    };
                     int player2points = string.IsNullOrEmpty(reader["player2_points"].ToString()) ? 0 : int.Parse(reader["player2_points"].ToString());
                     int winnerId = string.IsNullOrEmpty(reader["winner_id"].ToString()) ? 0 : int.Parse(reader["winner_id"].ToString()); ;
 
-                    TourneyMatch tm = new TourneyMatch(Id, tournamentId, date, player1Id, player1firstname, player1lastname, player1points, player2Id, player2firstname, player2lastname, player2points, winnerId);
+                    TourneyMatch tm = new TourneyMatch(Id, tournamentId, date, player1, player1points, player2, player2points, winnerId);
 
                     list.Add(tm);
 
@@ -169,11 +194,11 @@ namespace DAL.layers
             int loserId = 0;
             if (match.Player1Points > match.Player2Points)
             {
-                loserId= match.Player2id;
+                loserId= match.Player2.Id;
             }
             else
             {
-                loserId = match.Player1id;
+                loserId = match.Player1.Id;
             }
 
             string sql = "UPDATE s2synt_tourney_match SET player1_points = @p1points, player2_points = @p2points, winner_id = @winner_id WHERE id = @id;" +

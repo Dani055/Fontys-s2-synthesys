@@ -21,6 +21,9 @@ namespace BusinessLayer.models
         public ITournamentSystem System { get; set; }
         public bool HasStarted { get; set; }
 
+        public List<TourneyMatch> matches { get; set; }
+        public List<TourneyStanding> standings { get; set; }
+
         public Tournament()
         {
 

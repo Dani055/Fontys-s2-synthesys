@@ -9,8 +9,6 @@ namespace DuelSysDesktop.forms
         private readonly TournamentService _tournamentService;
         private readonly MatchService _matchService;
 
-        private List<TourneyStanding> standings = new List<TourneyStanding>();
-        private List<TourneyMatch> matches = new List<TourneyMatch>();
         private Tournament tourney = null;
         private int tourneyId;
         public ViewGames(int tourneyId)
@@ -48,7 +46,7 @@ namespace DuelSysDesktop.forms
         private void LoadTournamentInfo()
         {
             tourney = _tournamentService.GetTournamentById(tourneyId);
-            standings = _tournamentService.GetTournamentStandings(tourneyId);
+            tourney.standings = _tournamentService.GetTournamentStandings(tourneyId);
             if (tourney == null)
             {
                 DesktopUtils.ShowError("Tournament not found!");
@@ -57,13 +55,13 @@ namespace DuelSysDesktop.forms
             lblEndDate.Text = tourney.EndDate.ToShortDateString();
             lblStartDate.Text = tourney.StartDate.ToShortDateString();
             lblTourneyName.Text = tourney.Name;
-            lblRegisteredPlayers.Text = standings.Count().ToString();
+            lblRegisteredPlayers.Text = tourney.standings.Count().ToString();
         }
         private void LoadGames()
         {
             try
             {
-                matches = _matchService.GetMatches(tourneyId);
+                tourney.matches = _matchService.GetMatches(tourneyId);
             }
             catch (Exception ex)
             {
@@ -71,9 +69,9 @@ namespace DuelSysDesktop.forms
             }
             
             lvMatches.Items.Clear();
-            foreach (TourneyMatch m in matches)
+            foreach (TourneyMatch m in tourney.matches)
             {
-                string[] row = { m.Id.ToString(), m.TournamentId.ToString(), m.DateHeld.ToString(), m.Player1id.ToString(), m.Player1Firstname, m.Player1Lastname, m.Player1Points.ToString(), m.Player2id.ToString(), m.Player2Firstname, m.Player2Lastname, m.Player2Points.ToString(), m.WinnerId.ToString()};
+                string[] row = { m.Id.ToString(), m.TournamentId.ToString(), m.DateHeld.ToString(), m.Player1.Id.ToString(), m.Player1.Firstname, m.Player1.Lastname, m.Player1Points.ToString(), m.Player2.Id.ToString(), m.Player2.Firstname, m.Player2.Lastname, m.Player2Points.ToString(), m.WinnerId.ToString()};
 
                 ListViewItem lv = new ListViewItem(row);
                 lv.SubItems[2].BackColor = Color.Yellow;

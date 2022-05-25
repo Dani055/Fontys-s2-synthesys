@@ -61,16 +61,16 @@
             
         </div>
         <div class="tournament-standings">
-            @if (Model.standings.Count > 0)
+            @if (Model.tourney.standings.Count > 0)
             {
                 <h3>Leaderboard:</h3>
-                @foreach (TourneyStanding ts in Model.standings)
+                @foreach (TourneyStanding ts in Model.tourney.standings)
                 {
                     <div class="tournament-standing">
                         @if(ts.Place != null){
                             <h3>Place : @ts.Place</h3>
                         }   
-                        <p>@ts.PlayerFirstname @ts.PlayerLastname: <span class="green">Wins: </span>@ts.Wins  <span class="red">Losses: </span>@ts.Losses</p>
+                        <p>@ts.Player.Firstname @ts.Player.Lastname: <span class="green">Wins: </span>@ts.Wins  <span class="red">Losses: </span>@ts.Losses</p>
                     </div>
                 }
             }
@@ -82,15 +82,15 @@
         </div>
         <div class="tournament-games">
             <h3>Games:</h3>
-            @if (Model.matches.Count > 0)
+            @if (Model.tourney.matches.Count > 0)
             {
-                @foreach (TourneyMatch m in Model.matches)
+                @foreach (TourneyMatch m in Model.tourney.matches)
                 {
                 <div class="game">
                     <div class="game-players">
-                        <h3>@m.Player1Firstname @m.Player1Lastname</h3>
+                        <h3>@m.Player1.Firstname @m.Player1.Lastname</h3>
                         <p>VS</p>
-                        <h3>@m.Player2Firstname @m.Player2Lastname</h3>
+                        <h3>@m.Player2.Firstname @m.Player2.Lastname</h3>
                     </div>
                     <div class="game-date">
                         <p><span class="blue">@m.DateHeld.ToString()</span></p>
@@ -101,7 +101,7 @@
                 </div>
                 }
             }
-            else if(Model.matches.Count == 0 && !Model.tourney.HasStarted)
+            else if(Model.tourney.matches.Count == 0 && !Model.tourney.HasStarted)
             {
                 <h3>There are no matches scheduled for this tournament</h3>
             }

@@ -11,9 +11,11 @@ namespace BusinessLayer.models
         public int Id { get; set; }
         public int TournamentId { get; set; }
         public string TournamentName { get; set; }
-        public int PlayerId { get; set; }
+
+        public Player Player { get; set; }
+        /*public int PlayerId { get; set; }
         public string PlayerFirstname { get; set; }
-        public string PlayerLastname { get; set; }
+        public string PlayerLastname { get; set; }*/
         public int Wins { get; set; }
         public int Losses { get; set; }
         public string Status { get; set; }
@@ -23,13 +25,11 @@ namespace BusinessLayer.models
         {
 
         }
-        public TourneyStanding(int id, int tourneyid, int playerid, string playerfirstname, string playerlastname, int wins, int losses, string status, int place)
+        public TourneyStanding(int id, int tourneyid, Player player, int wins, int losses, string status, int place)
         {
             Id = id;
             TournamentId = tourneyid;
-            PlayerId = playerid;
-            PlayerFirstname = playerfirstname;
-            PlayerLastname = playerlastname;
+            Player = player;
             Wins = wins;
             Losses = losses;
             Status = status;

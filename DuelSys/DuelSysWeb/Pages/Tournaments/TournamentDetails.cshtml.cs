@@ -14,8 +14,7 @@ namespace DuelSysWeb.Pages.Tournaments
 
         [BindProperty]
         public Tournament tourney { get; set; }
-        public List<TourneyStanding> standings { get; set; }
-        public List<TourneyMatch> matches { get; set; }
+
 
         [BindProperty(SupportsGet = true)]
         public int tournamentId { get; set; }
@@ -35,17 +34,17 @@ namespace DuelSysWeb.Pages.Tournaments
                     _notyf.Error("Resource not found!");
                     return RedirectToPage("/Tournaments/ViewTournaments");
                 }
-                standings = _tournamentService.GetTournamentStandings(tournamentId);
-                matches = _matchService.GetMatches(tournamentId);
-                foreach (TourneyMatch m in matches)
+                tourney.standings = _tournamentService.GetTournamentStandings(tournamentId);
+                tourney.matches = _matchService.GetMatches(tournamentId);
+                foreach (TourneyMatch m in tourney.matches)
                 {
-                    if (m.Player1id == 0)
+                    if (m.Player1.Id == 0)
                     {
-                        m.Player1Firstname = "(Unknown)";
+                        m.Player1.Firstname = "(Unknown)";
                     }
-                    if (m.Player2id == 0)
+                    if (m.Player2.Id == 0)
                     {
-                        m.Player2Firstname = "(Unknown)";
+                        m.Player2.Firstname = "(Unknown)";
                     }
                 }
                 return Page();

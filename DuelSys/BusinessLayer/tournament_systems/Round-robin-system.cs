@@ -18,9 +18,9 @@ namespace BusinessLayer.tournament_systems
             tourney = t;
             SystemName = systemname;
         }
-        public List<TourneyMatch> GenerateTournamentMatches(List<TourneyStanding> registered)
+        public List<TourneyMatch> GenerateTournamentMatches()
         {
-            int gamesPerDay = CalculateGamesPerDay(registered);
+            int gamesPerDay = CalculateGamesPerDay(tourney.standings);
             DateTime startDate = tourney.StartDate;
             DateTime endDate = tourney.EndDate;
 
@@ -30,27 +30,28 @@ namespace BusinessLayer.tournament_systems
             DateTime currentDay = startDate;
             int gamesToday = 0;
 
-            for (int i = 0; i < registered.Count; i++)
+            for (int i = 0; i < tourney.standings.Count; i++)
             {
-                for (int j = 0; j < registered.Count; j++)
+                for (int j = 0; j < tourney.standings.Count; j++)
                 {
-                    int player1id = registered[i].PlayerId;
-                    int player2id = registered[j].PlayerId;
+                    int player1id = tourney.standings[i].Player.Id;
+                    int player2id = tourney.standings[j].Player.Id;
 
                     if (player1id != player2id)
                     {
                         //LINQ to find if a match already exists between 2 players
-                        TourneyMatch foundmatch = matches.Find(m => (m.Player1id == player1id && m.Player2id == player2id) || (m.Player1id == player2id && m.Player2id == player1id));
+                        TourneyMatch foundmatch = matches.Find(m => (m.Player1.Id == player1id && m.Player2.Id == player2id) || (m.Player1.Id == player2id && m.Player2.Id == player1id));
                         if (foundmatch != null)
                         {
                             continue;
                         }
 
                         //At this point a match will exist, for now the time is not known 
+                        
                         TourneyMatch match = new TourneyMatch()
                         {
-                            Player1id = player1id,
-                            Player2id = player2id,
+                            Player1 = tourney.standings[i].Player,
+                            Player2 = tourney.standings[j].Player,
                             DateHeld = DateTime.MinValue,
                             TournamentId = tourney.Id,
                         };

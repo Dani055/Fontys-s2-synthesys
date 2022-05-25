@@ -133,16 +133,16 @@ namespace BusinessLayer.services
             {
                 throw new Exception("This tournament has not ended yet");
             }
-            List<TourneyStanding> standings = _dalTournament.GetTournamentStandings(tourneyId);
-            
-            standings = standings.OrderByDescending(x => x.Wins).ThenBy(x => x.Losses).ToList();
+            tourney.standings = _dalTournament.GetTournamentStandings(tourneyId);
 
-            for (int i = 0; i < standings.Count; i++)
+            tourney.standings = tourney.standings.OrderByDescending(x => x.Wins).ThenBy(x => x.Losses).ToList();
+
+            for (int i = 0; i < tourney.standings.Count; i++)
             {
-                standings[i].Place = i + 1;
+                tourney.standings[i].Place = i + 1;
             }
 
-            return _dalTournament.EditStandings(standings);
+            return _dalTournament.EditStandings(tourney.standings);
         }
     }
 }

@@ -349,7 +349,14 @@ namespace DAL.layers
                     string playerfirstname = reader.GetString("first_name");
                     string playerlastname = reader.GetString("last_name");
 
-                    TourneyStanding ts = new TourneyStanding(Id, tournamentId, playerid, playerfirstname, playerlastname, wins, losses, status, place);
+                    Player player = new Player()
+                    {
+                        Id = playerid,
+                        Firstname = playerfirstname,
+                        Lastname = playerlastname,
+                    };
+
+                    TourneyStanding ts = new TourneyStanding(Id, tournamentId, player, wins, losses, status, place);
 
                     reader.Close();
                     return ts;
@@ -374,7 +381,7 @@ namespace DAL.layers
                 string sql = "SELECT ts.Id, ts.tournament_id, ts.player_id, ts.wins, ts.losses, ts.status, ts.place, u.first_name, u.last_name " +
                     "FROM s2synt_tourney_standings as ts " +
                     "inner join s2synt_user as u " +
-                    "on ts.player_id = u.id WHERE tournament_id = @tournament_id ORDER BY place, wins; ";
+                    "on ts.player_id = u.id WHERE tournament_id = @tournament_id ORDER BY place, wins desc, losses;";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 cmd.Parameters.AddWithValue("@tournament_id", tourneyId);
@@ -396,7 +403,14 @@ namespace DAL.layers
                     string playerfirstname = reader.GetString("first_name");
                     string playerlastname = reader.GetString("last_name");
 
-                    TourneyStanding ts = new TourneyStanding(Id, tournamentId, playerid, playerfirstname, playerlastname, wins, losses, status, place);
+                    Player player = new Player()
+                    {
+                        Id = playerid,
+                        Firstname = playerfirstname,
+                        Lastname = playerlastname,
+                    };
+
+                    TourneyStanding ts = new TourneyStanding(Id, tournamentId, player, wins, losses, status, place);
                     list.Add(ts);
                     
                 }
@@ -440,7 +454,14 @@ namespace DAL.layers
                     string playerfirstname = reader.GetString("first_name");
                     string playerlastname = reader.GetString("last_name");
 
-                    TourneyStanding ts = new TourneyStanding(Id, tournamentId, playerid, playerfirstname, playerlastname, wins, losses, status, place) { TournamentName = tournamentName};
+                    Player player = new Player()
+                    {
+                        Id = playerid,
+                        Firstname = playerfirstname,
+                        Lastname = playerlastname,
+                    };
+
+                    TourneyStanding ts = new TourneyStanding(Id, tournamentId, player, wins, losses, status, place) { TournamentName = tournamentName};
                     list.Add(ts);
 
                 }

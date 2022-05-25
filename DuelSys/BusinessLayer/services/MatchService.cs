@@ -36,23 +36,23 @@ namespace BusinessLayer.services
             tourney.HasStarted = true;
             _dalTournament.EditTournament(tourney);
 
-            List<TourneyStanding> registered = _dalTournament.GetTournamentStandings(tournamentId);
-            if (registered.Count < tourney.MinPlayers)
+            tourney.standings = _dalTournament.GetTournamentStandings(tournamentId);
+            if (tourney.standings.Count < tourney.MinPlayers)
             {
 
                 throw new Exception("Tournament has not reached minimum players and will NOT be scheduled");
             }
             else
             {
-                if (tourney.System.SystemName == "Single-elimination" && registered.Count % 4 != 0)
+                if (tourney.System.SystemName == "Single-elimination" && tourney.standings.Count % 4 != 0)
                 {
                     throw new Exception("This is an elimination tournament and the registered players are not dividable by 4. Tournament will NOT be scheduled.");
                 }
             }
 
-            List<TourneyMatch> matches = tourney.System.GenerateTournamentMatches(registered);
+            tourney.matches = tourney.System.GenerateTournamentMatches();
 
-            return _dalMatch.AddMatches(matches);
+            return _dalMatch.AddMatches(tourney.matches);
         }
 
         public List<TourneyMatch> GetMatches(int tourneyId)

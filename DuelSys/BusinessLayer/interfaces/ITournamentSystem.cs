@@ -11,6 +11,6 @@ namespace BusinessLayer.interfaces
     {
         public string SystemName { get; set; }
 
-        public List<TourneyMatch> GenerateTournamentMatches(List<TourneyStanding> registered);
+        public List<TourneyMatch> GenerateTournamentMatches();
     }
 }

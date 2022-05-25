@@ -19,9 +19,9 @@ namespace BusinessLayer.tournament_systems
             SystemName = systemname;
         }
 
-        public List<TourneyMatch> GenerateTournamentMatches(List<TourneyStanding> registered)
+        public List<TourneyMatch> GenerateTournamentMatches()
         {
-            int gamesPerDay = CalculateGamesPerDay(registered);
+            int gamesPerDay = CalculateGamesPerDay(tourney.standings);
             DateTime startDate = tourney.StartDate;
 
             List<TourneyMatch> matches = new List<TourneyMatch>();
@@ -30,15 +30,12 @@ namespace BusinessLayer.tournament_systems
             int gamesToday = 0;
 
             //Generate pre-determined matches
-            for (int i = 0; i < registered.Count; i += 2)
+            for (int i = 0; i < tourney.standings.Count; i += 2)
             {
-                int player1id = registered[i].PlayerId;
-                int player2id = registered[i + 1].PlayerId;
-
                 TourneyMatch match = new TourneyMatch()
                 {
-                    Player1id = player1id,
-                    Player2id = player2id,
+                    Player1 = tourney.standings[i].Player,
+                    Player2 = tourney.standings[i + 1].Player,
                     DateHeld = currentDay.Date.AddHours(8 + (2 * gamesToday)),
                     TournamentId = tourney.Id,
                 };
@@ -53,10 +50,12 @@ namespace BusinessLayer.tournament_systems
             }
 
             //Generate empty matches for people to move into later on
-            for (int i = 0; i < registered.Count - 1 - matches.Count; i++)
+            for (int i = 0; i < tourney.standings.Count - 1 - matches.Count; i++)
             {
                 TourneyMatch match = new TourneyMatch()
                 {
+                    Player1 = new Player(){Id = 0},
+                    Player2 = new Player() { Id = 0 },
                     DateHeld = currentDay.Date.AddHours(8 + (2 * gamesToday)),
                     TournamentId = tourney.Id,
                 };

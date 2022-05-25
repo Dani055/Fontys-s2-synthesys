@@ -23,21 +23,21 @@ namespace DuelSysDesktop.forms
         private void LoadMatchInfo()
         {
             lblDate.Text = match.DateHeld.ToString();
-            if (match.Player1id == 0)
+            if (match.Player1.Id == 0)
             {
                 lblP1Name.Text = "(Unkown)";
             }
             else
             {
-                lblP1Name.Text = match.Player1Firstname + " " + match.Player1Lastname;
+                lblP1Name.Text = match.Player1.Firstname + " " + match.Player1.Lastname;
             }
-            if (match.Player2id == 0)
+            if (match.Player2.Id == 0)
             {
                 lblP2Name.Text = "(Unkown)";
             }
             else
             {
-                lblP2Name.Text = match.Player2Firstname + " " + match.Player2Lastname;
+                lblP2Name.Text = match.Player2.Firstname + " " + match.Player2.Lastname;
             }
             tbxP1pts.Value = match.Player1Points;
             tbxP2pts.Value = match.Player2Points;
