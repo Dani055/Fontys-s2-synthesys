@@ -69,7 +69,7 @@ namespace BusinessLayer.tournament_systems
 
             return matches;
         }
-        private int CalculateGamesPerDay(List<TourneyStanding> registered)
+        public int CalculateGamesPerDay(List<TourneyStanding> registered)
         {
             int maxplayers = registered.Count;
             int daysForTournament = (tourney.EndDate.Date - tourney.StartDate.Date).Days + 1;

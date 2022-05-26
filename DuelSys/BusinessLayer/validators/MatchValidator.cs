@@ -11,7 +11,7 @@ namespace BusinessLayer.validators
     {
         public int DetermineWinner(TourneyMatch match)
         {
-            if (match.Player1.Id == 0 || match.Player2.Id == 0)
+            if (match.Player1 == null || match.Player2 == null || match.Player1.Id == 0 || match.Player2.Id == 0)
             {
                 throw new Exception("Cannot enter result. The players for this game are not yet decided!");
             }

@@ -13,9 +13,7 @@ namespace BusinessLayer.models
         public string TournamentName { get; set; }
 
         public Player Player { get; set; }
-        /*public int PlayerId { get; set; }
-        public string PlayerFirstname { get; set; }
-        public string PlayerLastname { get; set; }*/
+
         public int Wins { get; set; }
         public int Losses { get; set; }
         public string Status { get; set; }

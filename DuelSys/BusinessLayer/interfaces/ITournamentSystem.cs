@@ -12,5 +12,7 @@ namespace BusinessLayer.interfaces
         public string SystemName { get; set; }
 
         public List<TourneyMatch> GenerateTournamentMatches();
+
+        public int CalculateGamesPerDay(List<TourneyStanding> registered);
     }
 }

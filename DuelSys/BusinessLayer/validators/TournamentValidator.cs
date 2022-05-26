@@ -14,43 +14,43 @@ namespace BusinessLayer.validators
         {
             if (String.IsNullOrEmpty(tourney.Name))
             {
-                throw new Exception("You must enter a tournament name!");
+                throw new ArgumentException("You must enter a tournament name!");
             }
             else if (String.IsNullOrEmpty(tourney.SportName))
             {
-                throw new Exception("You must select a sport for the tournament!");
+                throw new ArgumentException("You must select a sport for the tournament!");
             }
             else if (String.IsNullOrEmpty(tourney.Description))
             {
-                throw new Exception("You must enter a tournament description!");
+                throw new ArgumentException("You must enter a tournament description!");
             }
             else if (tourney.StartDate >= tourney.EndDate || tourney.StartDate.Date.AddDays(-7) <= Utils.GetSystemDate.Date)
             {
-                throw new Exception("Invalid starting/ending dates. Make sure the tournament starts in at least 1 week and the start date is not bigger than the end date.");
+                throw new ArgumentException("Invalid starting/ending dates. Make sure the tournament starts in at least 1 week and the start date is not bigger than the end date.");
             }
             else if (tourney.MinPlayers < 2 || tourney.MaxPlayers < 2)
             {
-                throw new Exception("Min. and max players must be at least 2");
+                throw new ArgumentException("Min. and max players must be at least 2");
             }
             else if (String.IsNullOrEmpty(tourney.Location))
             {
-                throw new Exception("You must enter a tournament location!");
+                throw new ArgumentException("You must enter a tournament location!");
             }
             else if (String.IsNullOrEmpty(tourney.System.SystemName))
             {
-                throw new Exception("You must select a system for the tournament!");
+                throw new ArgumentException("You must select a system for the tournament!");
             }
             else if (tourney.System.SystemName == "Single-elimination")
             {
                 if (tourney.MinPlayers % 4 != 0 || tourney.MaxPlayers % 4 != 0)
                 {
-                    throw new Exception("You have selected a Single-elimination tournament system. For it to work the amount of participants must be dividable by 4.");
+                    throw new ArgumentException("You have selected a Single-elimination tournament system. For it to work the amount of participants must be dividable by 4.");
                 }
             }
             int gamesPerDay = CalculateTourneyGamesPerDay(tourney);
             if (gamesPerDay > 6)
             {
-                throw new Exception($"The selected time span for the tournament is too short to host all required games. Max. games per day: 6 | Required: {gamesPerDay} Consider extending the tournament deadline.");
+                throw new ArgumentException($"The selected time span for the tournament is too short to host all required games. Max. games per day: 6 | Required: {gamesPerDay} Consider extending the tournament deadline.");
             }
             return true;
 
