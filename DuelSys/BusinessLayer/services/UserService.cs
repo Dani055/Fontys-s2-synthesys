@@ -25,7 +25,7 @@ namespace BusinessLayer.services
             bool match = Utils.Verify(password, user.Password);
             if (!match)
             {
-                throw new Exception("Wrong username or password!");
+                throw new UnauthorizedAccessException("Wrong username or password!");
             }
             return user;
         }
@@ -35,7 +35,7 @@ namespace BusinessLayer.services
             {
                 if (loggedUser == null || !loggedUser.Role.CanAccessDesktopApp())
                 {
-                    throw new Exception("You are not authorized!");
+                    throw new UnauthorizedAccessException("You are not authorized!");
                 }
                 _userValidator.ValidateStaff((Staff)user);
                 string hashedPass = Utils.Hash(user.Password);

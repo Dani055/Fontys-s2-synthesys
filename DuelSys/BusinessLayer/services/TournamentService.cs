@@ -24,7 +24,7 @@ namespace BusinessLayer.services
         {
             if (!loggedUser.Role.CanAccessTournamentCUD())
             {
-                throw new Exception("You are not authorized to create a tournament!");
+                throw new UnauthorizedAccessException("You are not authorized to create a tournament!");
             }
             _tournamentValidator.ValidateTournament(tourney);
 
@@ -36,11 +36,11 @@ namespace BusinessLayer.services
         {
             if (!loggedUser.Role.CanAccessTournamentCUD())
             {
-                throw new Exception("You are not authorized to edit a tournament!");
+                throw new UnauthorizedAccessException("You are not authorized to edit a tournament!");
             }
             else if (_tournamentValidator.CheckIfTournamentBeginsInOneWeek(tourney))
             {
-                throw new Exception("Tournament cannot be edited because it begins in less than one week");
+                throw new ArgumentException("Tournament cannot be edited because it begins in less than one week");
             }
             _tournamentValidator.ValidateTournament(tourney);
 
@@ -51,7 +51,7 @@ namespace BusinessLayer.services
         {
             if (!loggedUser.Role.CanAccessTournamentCUD())
             {
-                throw new Exception("You are not authorized to delete a tournament!");
+                throw new UnauthorizedAccessException("You are not authorized to delete a tournament!");
             }
             return _dalTournament.DeleteTournament(id);
         }
@@ -83,7 +83,7 @@ namespace BusinessLayer.services
             TourneyStanding ts = _dalTournament.GetTournamentStanding(tourney.Id, playerId);
             if (_tournamentValidator.CheckIfTournamentBeginsInOneWeek(tourney))
             {
-                throw new Exception("Register unsuccessful. Tournament starts in less than 1 week.");
+                throw new ArgumentException("Register unsuccessful. Tournament starts in less than 1 week.");
             }
             else if (ts != null)
             {
@@ -107,7 +107,7 @@ namespace BusinessLayer.services
             }
             else if (_tournamentValidator.CheckIfTournamentBeginsInOneWeek(tourney))
             {
-                throw new Exception("Deregister unsuccessful. Tournament starts in less than 1 week.");
+                throw new ArgumentException("Deregister unsuccessful. Tournament starts in less than 1 week.");
             }
             else
             {
@@ -126,7 +126,7 @@ namespace BusinessLayer.services
         {
             if (!loggedUser.Role.CanAccessTournamentCUD())
             {
-                throw new Exception("You are not authorized to conclude a tournament!");
+                throw new UnauthorizedAccessException("You are not authorized to conclude a tournament!");
             }
             Tournament tourney = _dalTournament.GetTournamentById(tourneyId);
             if (tourney.EndDate.Date >= Utils.GetSystemDate.Date)

@@ -14,7 +14,7 @@ namespace DuelSysUnitTests.validators_tests
     public class MatchValidatorTest
     {
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ArgumentException))]
         public void MatchUndeterminedPlayers()
         {
             MatchValidator val = new MatchValidator();
@@ -24,7 +24,7 @@ namespace DuelSysUnitTests.validators_tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ArgumentException))]
         public void MatchPlayersHaveTooManyPoints()
         {
             MatchValidator val = new MatchValidator();
@@ -36,7 +36,7 @@ namespace DuelSysUnitTests.validators_tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ArgumentException))]
         public void MatchPlayersHaveInsufficientPoints()
         {
             MatchValidator val = new MatchValidator();
@@ -47,7 +47,7 @@ namespace DuelSysUnitTests.validators_tests
             val.DetermineWinner(match);
         }
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ArgumentException))]
         public void MatchPlayerLeadIsInsufficient()
         {
             MatchValidator val = new MatchValidator();
@@ -58,7 +58,7 @@ namespace DuelSysUnitTests.validators_tests
             val.DetermineWinner(match);
         }
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ArgumentException))]
         public void MatchPlayersAreTied()
         {
             MatchValidator val = new MatchValidator();

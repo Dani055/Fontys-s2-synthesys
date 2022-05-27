@@ -23,11 +23,11 @@ namespace BusinessLayer.services
             Tournament tourney = _dalTournament.GetTournamentById(tournamentId);
             if (!loggedUser.Role.CanAccessTournamentCUD())
             {
-                throw new Exception("You are not authorized to schedule a tournament!");
+                throw new UnauthorizedAccessException("You are not authorized to schedule a tournament!");
             }
             if (!_tournamentValidator.CheckIfTournamentBeginsInOneWeek(tourney))
             {
-                throw new Exception("Tournament must begin in 7 days in order to generate schedule!");
+                throw new ArgumentException("Tournament must begin in 7 days in order to generate schedule!");
             }
             if (tourney.HasStarted)
             {
@@ -40,13 +40,13 @@ namespace BusinessLayer.services
             if (tourney.standings.Count < tourney.MinPlayers)
             {
 
-                throw new Exception("Tournament has not reached minimum players and will NOT be scheduled");
+                throw new ArgumentOutOfRangeException("Tournament has not reached minimum players and will NOT be scheduled");
             }
             else
             {
                 if (tourney.System.SystemName == "Single-elimination" && tourney.standings.Count % 4 != 0)
                 {
-                    throw new Exception("This is an elimination tournament and the registered players are not dividable by 4. Tournament will NOT be scheduled.");
+                    throw new ArgumentOutOfRangeException("This is an elimination tournament and the registered players are not dividable by 4. Tournament will NOT be scheduled.");
                 }
             }
 
@@ -67,15 +67,15 @@ namespace BusinessLayer.services
         {
             if (!loggedUser.Role.CanAccessMatchCUD())
             {
-                throw new Exception("You are not authorized to enter a match result!");
+                throw new UnauthorizedAccessException("You are not authorized to enter a match result!");
             }
             else if (match.DateHeld.Date > Utils.GetSystemDate.Date)
             {
-                throw new Exception("This game has not been played yet!");
+                throw new ArgumentOutOfRangeException("This game has not been played yet!");
             }
             else if (match.WinnerId != 0)
             {
-                throw new Exception("The results of this game have already been entered!");
+                throw new ArgumentException("The results of this game have already been entered!");
             }
             int winnerId = _matchValidator.DetermineWinner(match);
             Tournament tourney = _dalTournament.GetTournamentById(match.TournamentId);
