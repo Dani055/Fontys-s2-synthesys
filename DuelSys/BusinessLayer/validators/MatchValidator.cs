@@ -15,20 +15,21 @@ namespace BusinessLayer.validators
             {
                 throw new Exception("Cannot enter result. The players for this game are not yet decided!");
             }
+            else if (match.Player1Points > 30 || match.Player2Points > 30)
+            {
+                throw new Exception("A player cannot have more than 30 points!");
+            }
             else if (match.Player1Points <= 20 && match.Player2Points <= 20)
             {
                 throw new Exception("A player needs at least 21 points to win!");
             }
-            else
+            else if(Math.Abs(match.Player1Points - match.Player2Points) < 2 && (match.Player1Points <= 28 || match.Player2Points <= 28))
+            {                                      
+               throw new Exception("A player needs to lead by at least 2 points to win!");
+            }
+            else if (match.Player1Points == 29 && match.Player2Points == 29)
             {
-                if ((match.Player1Points == 29 && match.Player2Points != 30) || (match.Player2Points == 29 && match.Player1Points != 30))
-                {
-                    throw new Exception("At 29-29, the side scoring the 30th point wins the game");
-                }
-                if (Math.Abs(match.Player1Points - match.Player2Points) < 2)
-                {
-                    throw new Exception("A player needs to lead by at least 2 points to win!");
-                }
+                throw new Exception("At 29-29, the side scoring the 30th point wins the game");
             }
 
             if (match.Player1Points > match.Player2Points)

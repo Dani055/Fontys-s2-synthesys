@@ -82,6 +82,11 @@ namespace DuelSysDesktop.forms
         {
             CreateTournament ct = new CreateTournament();
             ct.ShowDialog();
+            if (DesktopUtils.UpdateContent)
+            {
+                DesktopUtils.UpdateContent = false;
+                LoadTournaments(cbxTourneyStatus.SelectedItem.ToString());
+            }
         }
 
         private void btnEditTourney_Click(object sender, EventArgs e)
@@ -104,6 +109,11 @@ namespace DuelSysDesktop.forms
             }
             EditTournament et = new EditTournament(tourney.Id);
             et.ShowDialog();
+            if (DesktopUtils.UpdateContent)
+            {
+                DesktopUtils.UpdateContent = false;
+                LoadTournaments(cbxTourneyStatus.SelectedItem.ToString());
+            }
         }
 
         private void btnViewTourney_Click(object sender, EventArgs e)

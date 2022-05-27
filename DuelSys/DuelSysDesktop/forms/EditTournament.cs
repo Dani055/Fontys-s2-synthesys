@@ -66,7 +66,7 @@ namespace DuelSysDesktop.forms
                 if (result)
                 {
                     DesktopUtils.ShowInfo("Tournament edited!");
-                    
+                    DesktopUtils.UpdateContent = true;
                 }
             }
             catch (Exception ex)

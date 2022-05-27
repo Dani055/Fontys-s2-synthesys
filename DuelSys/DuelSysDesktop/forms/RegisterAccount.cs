@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using BusinessLayer.models;
 using BusinessLayer.roles;
 using BusinessLayer.interfaces;
+using System.Reflection;
 
 namespace DuelSysDesktop.forms
 {
@@ -63,7 +64,8 @@ namespace DuelSysDesktop.forms
                     Address = address,
                 };
             }
-            u.Role = Activator.CreateInstance(Type.GetType("BusinessLayer.roles." + role + "Role"), new object[] { role }) as IRole;
+            var type = Type.GetType("BusinessLayer.roles." + role + "Role,BusinessLayer");
+            u.Role = Activator.CreateInstance(type, new object[] { role }) as IRole;
             try
             {
                 bool result = _userService.Register(u, DesktopUtils.loggedUser);

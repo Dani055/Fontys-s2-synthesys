@@ -59,6 +59,7 @@ namespace DuelSysDesktop.forms
                 if (result)
                 {
                     DesktopUtils.ShowInfo("Tournament created!");
+                    DesktopUtils.UpdateContent = true;
                 }
             }
             catch (Exception ex)

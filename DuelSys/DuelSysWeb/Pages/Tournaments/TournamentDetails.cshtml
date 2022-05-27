@@ -101,9 +101,13 @@
                 </div>
                 }
             }
-            else
+            else if(Model.matches.Count == 0 && !Model.tourney.HasStarted)
             {
                 <h3>There are no matches scheduled for this tournament</h3>
+            }
+            else
+            {
+                <h3>This tournament has failed to start due to insufficient players</h3>
             }
         </div>
     </div>

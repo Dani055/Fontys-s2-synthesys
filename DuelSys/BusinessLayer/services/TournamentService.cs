@@ -129,7 +129,7 @@ namespace BusinessLayer.services
                 throw new Exception("You are not authorized to conclude a tournament!");
             }
             Tournament tourney = _dalTournament.GetTournamentById(tourneyId);
-            if (tourney.EndDate >= Utils.GetSystemDate)
+            if (tourney.EndDate.Date >= Utils.GetSystemDate.Date)
             {
                 throw new Exception("This tournament has not ended yet");
             }
