@@ -325,6 +325,7 @@
             this.Controls.Add(this.tbxFirstName);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "RegisterAccount";
             this.Text = "Register Account";
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();

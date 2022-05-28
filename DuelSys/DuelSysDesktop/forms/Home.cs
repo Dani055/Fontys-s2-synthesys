@@ -22,6 +22,7 @@ namespace DuelSysDesktop.forms
 
             cbxTourneyStatus.SelectedIndex = 0;
             lblTime.Text = DateTime.Now.ToString("HH:mm:ss");
+            lblWelcome.Text = "Welcome, " + DesktopUtils.loggedUser.Firstname + " " + DesktopUtils.loggedUser.Lastname;
             tmr.Start();
             LoadTournaments(cbxTourneyStatus.SelectedItem.ToString());
         }
@@ -205,6 +206,11 @@ namespace DuelSysDesktop.forms
             {
                 DesktopUtils.ShowError(ex.Message);
             }
+        }
+
+        private void lblWelcome_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

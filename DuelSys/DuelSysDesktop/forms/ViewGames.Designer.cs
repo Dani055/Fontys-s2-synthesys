@@ -55,6 +55,7 @@
             // 
             // lvMatches
             // 
+            this.lvMatches.BackColor = System.Drawing.Color.Gainsboro;
             this.lvMatches.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colId,
             this.colTourneyId,
@@ -241,6 +242,7 @@
             this.Controls.Add(this.lbl1);
             this.Controls.Add(this.btnEditGame);
             this.Controls.Add(this.lvMatches);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ViewGames";
             this.Text = "View Games";

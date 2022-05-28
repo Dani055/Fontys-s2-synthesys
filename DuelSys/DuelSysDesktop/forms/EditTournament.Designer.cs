@@ -422,6 +422,7 @@
             this.Controls.Add(this.lblSport);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EditTournament";
             this.Text = "Edit tournament";

@@ -18,6 +18,9 @@
             <a asp-route-status="Ended" class="@ednedStyle">Ended</a>
         </div>
     </div>
+    <div class="row">
+        <h4>Viewing @Model.tourneys.Count tournaments</h4>
+    </div>
     <div class="tournaments">
         @foreach (Tournament t in Model.tourneys)
         {
@@ -60,7 +63,5 @@
             </div>
         }        
     </div>
-    <div class="row">
-        <a href="#">Load more...</a>
-    </div>
+
 </div>

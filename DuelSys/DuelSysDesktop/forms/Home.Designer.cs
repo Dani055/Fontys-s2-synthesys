@@ -54,21 +54,25 @@
             this.tmr = new System.Windows.Forms.Timer(this.components);
             this.btnStartTournament = new System.Windows.Forms.Button();
             this.btnEndTournament = new System.Windows.Forms.Button();
+            this.lblWelcome = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnLogout
             // 
-            this.btnLogout.Location = new System.Drawing.Point(1295, 12);
+            this.btnLogout.BackColor = System.Drawing.Color.IndianRed;
+            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogout.Location = new System.Drawing.Point(1295, 23);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(101, 40);
             this.btnLogout.TabIndex = 6;
             this.btnLogout.Text = "Logout";
-            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.UseVisualStyleBackColor = false;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // lvTournaments
             // 
+            this.lvTournaments.BackColor = System.Drawing.Color.Gainsboro;
             this.lvTournaments.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colId,
             this.colName,
@@ -162,58 +166,68 @@
             // 
             // btnRegisterStaff
             // 
-            this.btnRegisterStaff.Location = new System.Drawing.Point(1228, 71);
+            this.btnRegisterStaff.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnRegisterStaff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRegisterStaff.Location = new System.Drawing.Point(1228, 101);
             this.btnRegisterStaff.Name = "btnRegisterStaff";
             this.btnRegisterStaff.Size = new System.Drawing.Size(168, 53);
             this.btnRegisterStaff.TabIndex = 9;
             this.btnRegisterStaff.Text = "Register account";
-            this.btnRegisterStaff.UseVisualStyleBackColor = true;
+            this.btnRegisterStaff.UseVisualStyleBackColor = false;
             this.btnRegisterStaff.Click += new System.EventHandler(this.btnRegisterStaff_Click);
             // 
             // btnCreateTouney
             // 
-            this.btnCreateTouney.Location = new System.Drawing.Point(12, 495);
+            this.btnCreateTouney.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnCreateTouney.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCreateTouney.Location = new System.Drawing.Point(1228, 191);
             this.btnCreateTouney.Name = "btnCreateTouney";
-            this.btnCreateTouney.Size = new System.Drawing.Size(130, 53);
+            this.btnCreateTouney.Size = new System.Drawing.Size(168, 55);
             this.btnCreateTouney.TabIndex = 10;
             this.btnCreateTouney.Text = "Create tournament";
-            this.btnCreateTouney.UseVisualStyleBackColor = true;
+            this.btnCreateTouney.UseVisualStyleBackColor = false;
             this.btnCreateTouney.Click += new System.EventHandler(this.btnCreateTouney_Click);
             // 
             // btnEditTourney
             // 
-            this.btnEditTourney.Location = new System.Drawing.Point(162, 495);
+            this.btnEditTourney.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnEditTourney.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditTourney.Location = new System.Drawing.Point(12, 495);
             this.btnEditTourney.Name = "btnEditTourney";
             this.btnEditTourney.Size = new System.Drawing.Size(130, 53);
             this.btnEditTourney.TabIndex = 11;
             this.btnEditTourney.Text = "Edit tournament";
-            this.btnEditTourney.UseVisualStyleBackColor = true;
+            this.btnEditTourney.UseVisualStyleBackColor = false;
             this.btnEditTourney.Click += new System.EventHandler(this.btnEditTourney_Click);
             // 
             // btnDelTourney
             // 
-            this.btnDelTourney.Location = new System.Drawing.Point(308, 495);
+            this.btnDelTourney.BackColor = System.Drawing.Color.IndianRed;
+            this.btnDelTourney.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelTourney.Location = new System.Drawing.Point(158, 495);
             this.btnDelTourney.Name = "btnDelTourney";
             this.btnDelTourney.Size = new System.Drawing.Size(130, 53);
             this.btnDelTourney.TabIndex = 12;
             this.btnDelTourney.Text = "Delete tournament";
-            this.btnDelTourney.UseVisualStyleBackColor = true;
+            this.btnDelTourney.UseVisualStyleBackColor = false;
             this.btnDelTourney.Click += new System.EventHandler(this.btnDelTourney_Click);
             // 
             // btnViewTourney
             // 
-            this.btnViewTourney.Location = new System.Drawing.Point(459, 495);
+            this.btnViewTourney.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnViewTourney.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnViewTourney.Location = new System.Drawing.Point(304, 498);
             this.btnViewTourney.Name = "btnViewTourney";
-            this.btnViewTourney.Size = new System.Drawing.Size(130, 53);
+            this.btnViewTourney.Size = new System.Drawing.Size(127, 53);
             this.btnViewTourney.TabIndex = 14;
             this.btnViewTourney.Text = "View tournament";
-            this.btnViewTourney.UseVisualStyleBackColor = true;
+            this.btnViewTourney.UseVisualStyleBackColor = false;
             this.btnViewTourney.Click += new System.EventHandler(this.btnViewTourney_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(955, 445);
+            this.pictureBox1.Location = new System.Drawing.Point(985, 460);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(398, 118);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -226,7 +240,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTime.AutoSize = true;
             this.lblTime.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTime.Location = new System.Drawing.Point(1228, 320);
+            this.lblTime.Location = new System.Drawing.Point(1228, 274);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(168, 50);
             this.lblTime.TabIndex = 16;
@@ -239,29 +253,45 @@
             // 
             // btnStartTournament
             // 
-            this.btnStartTournament.Location = new System.Drawing.Point(1228, 154);
+            this.btnStartTournament.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnStartTournament.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStartTournament.Location = new System.Drawing.Point(511, 445);
             this.btnStartTournament.Name = "btnStartTournament";
             this.btnStartTournament.Size = new System.Drawing.Size(168, 58);
             this.btnStartTournament.TabIndex = 25;
             this.btnStartTournament.Text = "Generate tournament schedule";
-            this.btnStartTournament.UseVisualStyleBackColor = true;
+            this.btnStartTournament.UseVisualStyleBackColor = false;
             this.btnStartTournament.Click += new System.EventHandler(this.btnStartTournament_Click);
             // 
             // btnEndTournament
             // 
-            this.btnEndTournament.Location = new System.Drawing.Point(1228, 238);
+            this.btnEndTournament.BackColor = System.Drawing.Color.Gold;
+            this.btnEndTournament.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEndTournament.Location = new System.Drawing.Point(511, 509);
             this.btnEndTournament.Name = "btnEndTournament";
             this.btnEndTournament.Size = new System.Drawing.Size(168, 57);
             this.btnEndTournament.TabIndex = 27;
             this.btnEndTournament.Text = "Conclude tournament";
-            this.btnEndTournament.UseVisualStyleBackColor = true;
+            this.btnEndTournament.UseVisualStyleBackColor = false;
             this.btnEndTournament.Click += new System.EventHandler(this.btnEndTournament_Click);
+            // 
+            // lblWelcome
+            // 
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Location = new System.Drawing.Point(1228, 351);
+            this.lblWelcome.MaximumSize = new System.Drawing.Size(150, 0);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(78, 20);
+            this.lblWelcome.TabIndex = 28;
+            this.lblWelcome.Text = "Welcome, ";
+            this.lblWelcome.Click += new System.EventHandler(this.lblWelcome_Click);
             // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1408, 590);
+            this.Controls.Add(this.lblWelcome);
             this.Controls.Add(this.btnEndTournament);
             this.Controls.Add(this.btnStartTournament);
             this.Controls.Add(this.lblTime);
@@ -274,6 +304,7 @@
             this.Controls.Add(this.cbxTourneyStatus);
             this.Controls.Add(this.lvTournaments);
             this.Controls.Add(this.btnLogout);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Home";
             this.Text = "Home";
@@ -310,5 +341,6 @@
         private ColumnHeader colName;
         private Button btnStartTournament;
         private Button btnEndTournament;
+        private Label lblWelcome;
     }
 }

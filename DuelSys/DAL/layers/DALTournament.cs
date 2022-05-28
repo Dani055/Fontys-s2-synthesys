@@ -417,7 +417,7 @@ namespace DAL.layers
                     "FROM s2synt_tourney_standings as ts " +
                     "inner join s2synt_user as u on ts.player_id = u.id  " +
                     "inner join s2synt_tournament as t on ts.tournament_id = t.id " +
-                    "WHERE player_id = @player_id ORDER BY id DESC LIMIT 10";
+                    "WHERE player_id = @player_id AND place IS NOT NULL ORDER BY id DESC LIMIT 10";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 cmd.Parameters.AddWithValue("@player_id", playerId);
