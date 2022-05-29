@@ -35,17 +35,16 @@ namespace BusinessLayer.models
             DateHeld = dateheld;
 
             Player1id = player1id;
-            Player1Firstname = player1firstname;
-            Player1Lastname = player1lastname;
+            Player1Firstname = player1firstname == "" ? null : player1firstname;
+            Player1Lastname = player1lastname == "" ? null : player1lastname;
             Player1Points = player1points;
 
             Player2id = player2id;
-            Player2Firstname = player2firstname;
-            Player2Lastname = player2lastname;
+            Player2Firstname = player2firstname == "" ? null : player2firstname;
+            Player2Lastname = player2lastname == "" ? null : player2lastname;
             Player2Points = player2points;
 
             WinnerId = winnerid;
-
         }
 
     }

@@ -86,7 +86,17 @@ namespace DuelSysDesktop.forms
 
         private void btnEditTourney_Click(object sender, EventArgs e)
         {
-            Tournament tourney = lvTournaments.SelectedItems[0].Tag as Tournament;
+            Tournament tourney = null;
+            try
+            {
+                tourney = lvTournaments.SelectedItems[0].Tag as Tournament;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                DesktopUtils.ShowError("Select tournament to edit!");
+                return;
+            }
+            
             if (_tournamentValidator.CheckIfTournamentBeginsInOneWeek(tourney))
             {
                 DesktopUtils.ShowError("Tournament begins in less than one week and cannot be edited!");
@@ -98,8 +108,17 @@ namespace DuelSysDesktop.forms
 
         private void btnViewTourney_Click(object sender, EventArgs e)
         {
-            ViewGames vg = new ViewGames();
-            vg.ShowDialog();
+            try
+            {
+                int tourneyId = Convert.ToInt16(lvTournaments.SelectedItems[0].Text);
+                ViewGames vg = new ViewGames(tourneyId);
+                vg.ShowDialog();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                DesktopUtils.ShowError("Select tournament to view!");
+            }
+
         }
 
         private void cbxTourneyStatus_SelectedIndexChanged(object sender, EventArgs e)

@@ -21,6 +21,7 @@ namespace DuelSysDesktop
                 services.AddSingleton<TournamentScheduler>();
                 services.AddSingleton<UserValidator>();
                 services.AddSingleton<TournamentValidator>();
+                services.AddSingleton<MatchValidator>();
 
                 services.AddScoped<UserService>();
                 services.AddScoped<MatchService>();

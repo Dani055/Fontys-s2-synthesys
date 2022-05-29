@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditGame));
-            this.btxP2pts = new System.Windows.Forms.NumericUpDown();
+            this.tbxP2pts = new System.Windows.Forms.NumericUpDown();
             this.tbxP1pts = new System.Windows.Forms.NumericUpDown();
             this.lblMaxPlayers = new System.Windows.Forms.Label();
             this.lblPlayer1Pts = new System.Windows.Forms.Label();
@@ -41,17 +41,17 @@
             this.lblP1Name = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
             this.btnEditGame = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.btxP2pts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbxP2pts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbxP1pts)).BeginInit();
             this.SuspendLayout();
             // 
-            // btxP2pts
+            // tbxP2pts
             // 
-            this.btxP2pts.BackColor = System.Drawing.Color.Gainsboro;
-            this.btxP2pts.Location = new System.Drawing.Point(250, 200);
-            this.btxP2pts.Name = "btxP2pts";
-            this.btxP2pts.Size = new System.Drawing.Size(85, 27);
-            this.btxP2pts.TabIndex = 96;
+            this.tbxP2pts.BackColor = System.Drawing.Color.Gainsboro;
+            this.tbxP2pts.Location = new System.Drawing.Point(250, 200);
+            this.tbxP2pts.Name = "tbxP2pts";
+            this.tbxP2pts.Size = new System.Drawing.Size(85, 27);
+            this.tbxP2pts.TabIndex = 96;
             // 
             // tbxP1pts
             // 
@@ -173,6 +173,7 @@
             this.btnEditGame.TabIndex = 103;
             this.btnEditGame.Text = "Enter result";
             this.btnEditGame.UseVisualStyleBackColor = false;
+            this.btnEditGame.Click += new System.EventHandler(this.btnEditGame_Click);
             // 
             // EditGame
             // 
@@ -185,7 +186,7 @@
             this.Controls.Add(this.lblP2Name);
             this.Controls.Add(this.lblPlayer1);
             this.Controls.Add(this.lblPlayer2);
-            this.Controls.Add(this.btxP2pts);
+            this.Controls.Add(this.tbxP2pts);
             this.Controls.Add(this.tbxP1pts);
             this.Controls.Add(this.lblMaxPlayers);
             this.Controls.Add(this.lblPlayer1Pts);
@@ -194,7 +195,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EditGame";
             this.Text = "EditGame";
-            ((System.ComponentModel.ISupportInitialize)(this.btxP2pts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbxP2pts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbxP1pts)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -203,7 +204,7 @@
 
         #endregion
 
-        private NumericUpDown btxP2pts;
+        private NumericUpDown tbxP2pts;
         private NumericUpDown tbxP1pts;
         private Label lblMaxPlayers;
         private Label lblPlayer1Pts;

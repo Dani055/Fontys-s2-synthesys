@@ -10,12 +10,15 @@ namespace BusinessLayer.services
         private readonly IDALMatch _dalMatch;
         private readonly TournamentValidator _tournamentValidator;
         private readonly TournamentScheduler _tournamentScheduler;
-        public MatchService(IDALTournament dalTournament,IDALMatch dalMatch, TournamentValidator tournamentValidator, TournamentScheduler tournamentScheduler)
+        private readonly MatchValidator _matchValidator;
+
+        public MatchService(IDALTournament dalTournament,IDALMatch dalMatch, TournamentValidator tournamentValidator, TournamentScheduler tournamentScheduler, MatchValidator matchValidator)
         {
             _dalTournament = dalTournament;
             _dalMatch = dalMatch;
             _tournamentValidator = tournamentValidator;
             _tournamentScheduler = tournamentScheduler;
+            _matchValidator = matchValidator;
         }
         public bool ScheduleTournament(int tournamentId, User loggedUser)
         {
@@ -52,6 +55,33 @@ namespace BusinessLayer.services
             List<TourneyMatch> matches = _tournamentScheduler.GenerateTournamentMatches(tourney, registered);
 
             return _dalMatch.AddMatches(matches);
+        }
+
+        public List<TourneyMatch> GetMatches(int tourneyId)
+        {
+            return _dalMatch.GetMatches(tourneyId);
+        }
+
+        public bool EnterMatchResult(TourneyMatch match, User loggedUser)
+        {
+            if (!loggedUser.Role.CanAccessMatchCUD())
+            {
+                throw new Exception("You are not authorized to enter a match result!");
+            }
+            else if (match.DateHeld.Date > Utils.GetSystemDate.Date)
+            {
+                throw new Exception("This game has not been played yet!");
+            }
+            else if (match.WinnerId != 0)
+            {
+                throw new Exception("The results of this game have already been entered!");
+            }
+            int winnerId = _matchValidator.DetermineWinner(match);
+            Tournament tourney = _dalTournament.GetTournamentById(match.TournamentId);
+
+            match.WinnerId = winnerId;
+
+            return _dalMatch.EnterMatchScore(tourney, match);
         }
     }
 }

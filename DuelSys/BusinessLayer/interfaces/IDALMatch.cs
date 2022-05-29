@@ -10,5 +10,8 @@ namespace BusinessLayer.interfaces
     public interface IDALMatch
     {
         public bool AddMatches(List<TourneyMatch> matches);
+        public List<TourneyMatch> GetMatches(int tourneyId);
+
+        public bool EnterMatchScore(Tournament tourney, TourneyMatch match);
     }
 }
