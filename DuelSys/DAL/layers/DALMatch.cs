@@ -32,8 +32,8 @@ namespace DAL.layers
                 {
                     cmd.Parameters.Clear();
 
-                    cmd.Parameters.AddWithValue("@player1_id", m.Player1id);
-                    cmd.Parameters.AddWithValue("@player2_id", m.Player2id);
+                    cmd.Parameters.AddWithValue("@player1_id", m.Player1id == 0 ? null : m.Player1id);
+                    cmd.Parameters.AddWithValue("@player2_id", m.Player2id == 0 ? null : m.Player2id);
                     cmd.Parameters.AddWithValue("@date", m.DateHeld.ToString(dBSettings.DateTimeFormat));
                     cmd.Parameters.AddWithValue("@tournament_id", m.TournamentId);
                     cmd.ExecuteNonQuery();
@@ -130,7 +130,8 @@ namespace DAL.layers
 
             if (tourney.SystemName == "Single-elimination")
             {
-                //Add extra query here
+                sql += "update s2synt_tourney_match set player1_id  = if(player1_id is null, @winner_id, player1_id), player2_id = if(player2_id is null and player1_id != @winner_id, @winner_id, player2_id) where id in" +
+                    "(SELECT id FROM (SELECT id FROM s2synt_tourney_match where (player1_id is NULL or player2_id is NULL) and tournament_id = @tournament_id ORDER BY date LIMIT 1) as t);";
             }
 
             MySqlCommand cmd = new MySqlCommand(sql, conn);

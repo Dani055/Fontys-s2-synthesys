@@ -17,8 +17,7 @@ namespace BusinessLayer.services
             }
             else if (tourney.SystemName == "Single-elimination")
             {
-                //Implement l8er
-                return null;
+                return GenerateEliminationMatches(tourney, registered);
             }
             else
             {
@@ -88,6 +87,58 @@ namespace BusinessLayer.services
             return matches;
 
         }
+        private List<TourneyMatch> GenerateEliminationMatches(Tournament tourney, List<TourneyStanding> registered)
+        {
+            int gamesPerDay = CalculateTourneyGamesPerDay(tourney, registered);
+            DateTime startDate = tourney.StartDate;
+
+            List<TourneyMatch> matches = new List<TourneyMatch>();
+
+            DateTime currentDay = startDate;
+            int gamesToday = 0;
+
+            //Generate pre-determined matches
+            for (int i = 0; i < registered.Count; i+=2)
+            {
+                int player1id = registered[i].PlayerId;
+                int player2id = registered[i+1].PlayerId;
+
+                TourneyMatch match = new TourneyMatch()
+                {
+                    Player1id = player1id,
+                    Player2id = player2id,
+                    DateHeld = currentDay.Date.AddHours(8 + (2 * gamesToday)),
+                    TournamentId = tourney.Id,
+                };
+
+                matches.Add(match);
+                gamesToday++;
+                if (gamesToday >= gamesPerDay)
+                {
+                    gamesToday = 0;
+                    currentDay = currentDay.AddDays(1);
+                }
+            }
+
+            //Generate empty matches for people to move into later on
+            for (int i = 0; i < registered.Count - 1 - matches.Count; i++)
+            {
+                TourneyMatch match = new TourneyMatch()
+                {
+                    DateHeld = currentDay.Date.AddHours(8 + (2 * gamesToday)),
+                    TournamentId = tourney.Id,
+                };
+                matches.Add(match);
+                if (gamesToday >= gamesPerDay)
+                {
+                    gamesToday = 0;
+                    currentDay = currentDay.AddDays(1);
+                }
+            }
+
+            return matches;
+        }
+
         private int CalculateTourneyGamesPerDay(Tournament tourney, List<TourneyStanding> registered)
         {
             int maxplayers = registered.Count;

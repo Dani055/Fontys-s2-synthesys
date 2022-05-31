@@ -345,7 +345,7 @@ namespace DAL.layers
                     int wins = reader.GetInt32("wins");
                     int losses = reader.GetInt32("losses");
                     string status = reader.GetString("status");
-                    int place = int.Parse(reader["wins"].ToString());
+                    int place = string.IsNullOrEmpty(reader["place"].ToString()) ? 0 : int.Parse(reader["place"].ToString());
                     string playerfirstname = reader.GetString("first_name");
                     string playerlastname = reader.GetString("last_name");
 
@@ -392,7 +392,7 @@ namespace DAL.layers
                     int wins = reader.GetInt32("wins");
                     int losses = reader.GetInt32("losses");
                     string status = reader.GetString("status");
-                    int place = int.Parse(reader["wins"].ToString());
+                    int place = string.IsNullOrEmpty(reader["place"].ToString()) ? 0 : int.Parse(reader["place"].ToString());
                     string playerfirstname = reader.GetString("first_name");
                     string playerlastname = reader.GetString("last_name");
 
@@ -402,6 +402,40 @@ namespace DAL.layers
                 }
                 reader.Close();
                 return list;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public bool EditStandings(List<TourneyStanding> standings)
+        {
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
+
+            string sql = "UPDATE s2synt_tourney_standings SET place = @place WHERE id = @id";
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            conn.Open();
+            MySqlTransaction tran = conn.BeginTransaction();
+            cmd.Transaction = tran;
+
+            try
+            {
+                foreach (TourneyStanding s in standings)
+                {
+                    cmd.Parameters.Clear();
+
+                    cmd.Parameters.AddWithValue("@place", s.Place);
+                    cmd.Parameters.AddWithValue("@id", s.Id);
+                    cmd.ExecuteNonQuery();
+                }
+                tran.Commit();
+                return true;
+            }
+            catch
+            {
+                tran.Rollback();
+                throw;
             }
             finally
             {

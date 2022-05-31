@@ -24,5 +24,6 @@ namespace BusinessLayer.interfaces
         public TourneyStanding GetTournamentStanding(int tourneyId, int playerId);
 
         public List<TourneyStanding> GetTournamentStandings(int tourneyId);
+        public bool EditStandings(List<TourneyStanding> standings);
     }
 }

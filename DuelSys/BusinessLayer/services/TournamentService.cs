@@ -118,5 +118,27 @@ namespace BusinessLayer.services
         {
             return _dalTournament.GetTournamentStandings(tourneyId);
         }
+        public bool ConcludeTournamentAndRankPlayers(int tourneyId, User loggedUser)
+        {
+            if (!loggedUser.Role.CanAccessTournamentCUD())
+            {
+                throw new Exception("You are not authorized to conclude a tournament!");
+            }
+            Tournament tourney = _dalTournament.GetTournamentById(tourneyId);
+            if (tourney.EndDate >= Utils.GetSystemDate)
+            {
+                throw new Exception("This tournament has not ended yet");
+            }
+            List<TourneyStanding> standings = _dalTournament.GetTournamentStandings(tourneyId);
+            
+            standings = standings.OrderByDescending(x => x.Wins).ThenBy(x => x.Losses).ToList();
+
+            for (int i = 0; i < standings.Count; i++)
+            {
+                standings[i].Place = i + 1;
+            }
+
+            return _dalTournament.EditStandings(standings);
+        }
     }
 }

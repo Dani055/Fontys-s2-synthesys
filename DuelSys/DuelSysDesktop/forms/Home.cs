@@ -175,5 +175,26 @@ namespace DuelSysDesktop.forms
                 LoadTournaments(cbxTourneyStatus.SelectedItem.ToString());
             }
         }
+
+        private void btnEndTournament_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int tourneyId = Convert.ToInt16(lvTournaments.SelectedItems[0].Text);
+                bool result = _tournamentService.ConcludeTournamentAndRankPlayers(tourneyId, DesktopUtils.loggedUser);
+                if (result)
+                {
+                    DesktopUtils.ShowInfo("Tournament concluded");
+                }
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                DesktopUtils.ShowError("Select tournament to conclude!");
+            }
+            catch (Exception ex)
+            {
+                DesktopUtils.ShowError(ex.Message);
+            }
+        }
     }
 }

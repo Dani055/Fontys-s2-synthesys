@@ -255,6 +255,7 @@
             this.btnEndTournament.TabIndex = 27;
             this.btnEndTournament.Text = "Conclude tournament";
             this.btnEndTournament.UseVisualStyleBackColor = true;
+            this.btnEndTournament.Click += new System.EventHandler(this.btnEndTournament_Click);
             // 
             // Home
             // 

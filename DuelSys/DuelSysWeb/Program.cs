@@ -23,8 +23,9 @@ builder.Services.AddSingleton<IDALUser, DALUser>();
 builder.Services.AddSingleton<IDALMatch, DALMatch>();
 
 builder.Services.AddSingleton<TournamentScheduler>();
-builder.Services.AddSingleton<TournamentValidator>();
 builder.Services.AddSingleton<UserValidator>();
+builder.Services.AddSingleton<TournamentValidator>();
+builder.Services.AddSingleton<MatchValidator>();
 
 builder.Services.AddScoped<TournamentService>();
 builder.Services.AddScoped<MatchService>();
