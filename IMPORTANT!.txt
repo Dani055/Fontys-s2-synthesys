@@ -1,0 +1,16 @@
+Link to repo: https://git.fhict.nl/I476740/s2-synthesis
+
+Fulfilled Major/Minor requirements:
+
+- FR-06: Support multiple tournament systems 
+- FR-09: Support leader board
+- FR-10: Generate player profile
+
+Credentials for staff accounts
+Account 1
+username: jrdn
+password: 123
+
+Account 2
+username: staff
+password: 123
