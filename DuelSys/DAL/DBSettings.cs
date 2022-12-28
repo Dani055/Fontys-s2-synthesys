@@ -8,7 +8,7 @@ namespace DAL
 {
     public class DBSettings
     {
-        private string conString = "server=studmysql01.fhict.local;database=dbi476740;uid=dbi476740;password=123rty;";
+        private string conString = "Your connection string here";
         public string DateTimeFormat { get; } = "yyyy-MM-dd HH:mm:ss";
         public string GetConString()
         {
